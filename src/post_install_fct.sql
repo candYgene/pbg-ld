@@ -1,0 +1,1 @@
+../../B4F/src/post_install_fct.sql

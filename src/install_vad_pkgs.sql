@@ -1,0 +1,1 @@
+../../B4F/src/install_vad_pkgs.sql
