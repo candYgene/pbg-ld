@@ -1,5 +1,5 @@
 -- 
--- SPARQL query to cross-reference tomatochromosome in two RDF graphs.
+-- SPARQL query to cross-reference chromosomes in two RDF graphs.
 --   graph URI: https://solgenomics.net/genome/Solanum_lycopersicum
 --     chromosome URI: e.g. http://solgenomics.net/genome/Solanum_lycopersicum/chromosome/SL2.50ch01
 --
@@ -27,5 +27,5 @@ WHERE {
 --
 -- PREFIX owl: <http://www.w3.org/2002/07/owl#>
 -- WITH  <https://solgenomics.net/genome/Solanum_lycopersicum>
--- DELETE { ?s ?p ?o }
--- { ?s ?p ?o ; owl:sameAs ?o }
+-- DELETE WHERE
+-- { ?s owl:sameAs ?o }

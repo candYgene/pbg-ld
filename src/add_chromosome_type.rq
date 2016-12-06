@@ -21,5 +21,5 @@ WHERE {
 --
 -- PREFIX obo: <http://purl.obolibrary.org/obo/>
 -- WITH  <http://plants.ensembl.org/Solanum_lycopersicum>
--- DELETE { ?s ?p ?o }
--- { ?s ?p ?o ; a obo:SO_0000340 }
+-- DELETE WHERE
+-- { ?s a obo:SO_0000340 }
