@@ -2,7 +2,10 @@
 
 **1. Build a [Docker](https://www.docker.com/) container with [Virtuoso Universal Server](http://virtuoso.openlinksw.com/) (open source edition).**
 
-`cd src; docker build -t nlesc/virtuoso .`
+```
+cd src
+docker build -t nlesc/virtuoso .
+```
 
 **2. Start the server.**
 
