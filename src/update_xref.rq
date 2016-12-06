@@ -1,0 +1,17 @@
+-- 
+-- SPARQL query to fix cross-references in EnsEMBL RDF graph.
+--
+-- Prerequisite: GRANT SPARQL_UPDATE to "SPARQL";
+--
+
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+WITH <http://plants.ensembl.org/Solanum_lycopersicum>
+DELETE { ?s rdfs:seeAlso ?o }
+INSERT { ?s rdfs:seeAlso ?fixed }
+WHERE
+{ 
+   ?s rdfs:seeAlso ?o .
+   FILTER regex(?o, 'http://identifiers.org/(go|kegg)') .
+   BIND(uri(replace(str(?o), '%253A', ':')) AS ?fixed)
+} 
