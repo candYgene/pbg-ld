@@ -1,0 +1,25 @@
+-- 
+-- SPARQL query to add missing primary trascript type (triples) to EnsEMBL RDF graph.
+--
+-- Prerequisite: GRANT SPARQL_UPDATE to "SPARQL";
+--
+
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+
+INSERT INTO <http://plants.ensembl.org/Solanum_lycopersicum> {
+   ?chr2 a obo:SO_0000120
+}  
+WHERE {
+   GRAPH <https://solgenomics.net/genome/Solanum_lycopersicum> {
+      ?chr1 a obo:SO_0000120 .
+      BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl.transcript/', replace(str(?chr1), '.+/', ''))) AS ?chr2)
+   }
+}
+
+--
+-- SPARQL query to delete above triples
+--
+-- PREFIX obo: <http://purl.obolibrary.org/obo/>
+-- WITH  <http://plants.ensembl.org/Solanum_lycopersicum>
+-- DELETE WHERE
+-- { ?s a obo:SO_0000120 }
