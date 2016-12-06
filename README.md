@@ -33,5 +33,3 @@ RDF graphs (IRIs):
 * EnsEMBL: `http://plants.ensembl.org/Solanum_lycopersicum`
 
 For further details visit the [wiki](https://github.com/DTL-FAIRData/ODEX4all-UseCases/wiki/VLPB) page.
-----
-TODO
