@@ -24,11 +24,13 @@ Use `dba` for both account name and password.
 
 **5. Query tomato SGN-LD via Virtuoso [SPARQL endpoint](http://localhost:8890/sparql) or [Faceted Browser](http://localhost:8890/fct/) (no login required).**
 
-Imported RDF graphs (IRIs):
+RDF graphs (IRIs):
 
-* `http://solgenomics.net/genome/Solanum_lycopersicum`
+* SGN: `http://solgenomics.net/genome/Solanum_lycopersicum`
 
-* `http://solgenomics.net/genome/Solanum_pennellii`
+* SGN: `http://solgenomics.net/genome/Solanum_pennellii`
+
+* EnsEMBL: `http://plants.ensembl.org/Solanum_lycopersicum`
 
 For further details visit the [wiki](https://github.com/DTL-FAIRData/ODEX4all-UseCases/wiki/VLPB) page.
 ----
