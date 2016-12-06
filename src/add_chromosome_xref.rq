@@ -1,0 +1,31 @@
+-- 
+-- SPARQL query to cross-reference tomatochromosome in two RDF graphs.
+--   graph URI: https://solgenomics.net/genome/Solanum_lycopersicum
+--     chromosome URI: e.g. http://solgenomics.net/genome/Solanum_lycopersicum/chromosome/SL2.50ch01
+--
+--   graph URI: http://plants.ensembl.org/Solanum_lycopersicum
+--     chromosome URI: e.g. http://rdf.ebi.ac.uk/resource/ensembl/32/solanum_lycopersicum/SL2.50/1
+--
+-- Prerequisite: GRANT SPARQL_UPDATE to "SPARQL";
+--
+
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT INTO <https://solgenomics.net/genome/Solanum_lycopersicum> {
+   ?chr1 owl:sameAs ?chr2
+}   
+WHERE {
+   GRAPH <https://solgenomics.net/genome/Solanum_lycopersicum> {
+      ?chr1 a obo:SO_0000340 .
+      BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/32/solanum_lycopersicum/SL2.50/', replace(str(?chr1), '.+ch0?', ''))) AS ?chr2)
+   }
+}
+
+--
+-- SPARQL query to delete above triples
+--
+-- PREFIX owl: <http://www.w3.org/2002/07/owl#>
+-- WITH  <https://solgenomics.net/genome/Solanum_lycopersicum>
+-- DELETE { ?s ?p ?o }
+-- { ?s ?p ?o ; owl:sameAs ?o }
