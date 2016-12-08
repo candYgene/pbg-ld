@@ -4,6 +4,8 @@
 #
 # Author: Arnold Kuzniar
 #
+# Prerequisite: GRANT EXECUTE ON "DB.DBA.EXEC_AS" to "SPARQL";
+#
 
 RDF_PROXY="http://localhost:8890/describe/"
 LOG_FILE=$0.log
