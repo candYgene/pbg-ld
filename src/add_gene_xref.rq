@@ -1,0 +1,24 @@
+--
+-- SPARQL query to link protein-coding genes in two RDF graphs.
+--   graph URI: https://solgenomics.net/genome/Solanum_lycopersicum
+--     gene URI: e.g. http://solgenomics.net/genome/Solanum_lycopersicum/gene/Solyc07g049530.2
+--
+--   graph URI: http://plants.ensembl.org/Solanum_lycopersicum
+--     gene URI: e.g. http://rdf.ebi.ac.uk/resource/ensembl/Solyc07g049530.2
+--
+
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+
+INSERT INTO <https://solgenomics.net/genome/Solanum_lycopersicum> {
+   ?gene1 owl:sameAs ?gene2
+}
+WHERE {  
+   GRAPH <https://solgenomics.net/genome/Solanum_lycopersicum> {
+      ?gene1 a obo:SO_0000704 .
+      BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/', replace(str(?gene1), '.+/', ''))) AS ?gene2)
+   }
+   GRAPH <http://plants.ensembl.org/Solanum_lycopersicum> {
+      ?gene2 a obo:SO_0001217
+   }
+}
