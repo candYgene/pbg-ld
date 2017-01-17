@@ -30,6 +30,8 @@ RDF graphs (IRIs):
 
 * SGN: `http://solgenomics.net/genome/Solanum_pennellii`
 
-* EnsEMBL: `http://plants.ensembl.org/Solanum_lycopersicum`
+* Ensembl Plants: `http://plants.ensembl.org/Solanum_lycopersicum`
+
+* UniProt: `http://www.uniprot.org/proteomes/Solanum_lycopersicum`
 
 For further details visit the [wiki](https://github.com/DTL-FAIRData/ODEX4all-UseCases/wiki/VLPB) page.
