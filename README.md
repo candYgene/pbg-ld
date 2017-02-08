@@ -26,7 +26,9 @@ Use `dba` for both account name and password.
 **5. Run queries via Virtuoso [SPARQL endpoint](http://localhost:8890/sparql) or browse data via [Faceted Browser](http://localhost:8890/fct/) (no login required).**
 
 RDF graphs (IRIs):
-  * SGN: `http://solgenomics.net/genome/Solanum_lycopersicum` and `http://solgenomics.net/genome/Solanum_pennellii`
+  * SGN:
+    * `http://solgenomics.net/genome/Solanum_lycopersicum`
+    * `http://solgenomics.net/genome/Solanum_pennellii`
   * Ensembl: `http://plants.ensembl.org/Solanum_lycopersicum`
   * UniProt: `http://www.uniprot.org/proteomes/Solanum_lycopersicum`
 
