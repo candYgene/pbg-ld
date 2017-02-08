@@ -19,4 +19,7 @@ curl --stderr - -LH "Accept: application/rdf+xml" -o ro.rdf "http://purl.obolibr
 curl --stderr - -LH "Accept: application/rdf+xml" -o uniprot_core.rdf "http://purl.uniprot.org/core/" \
 	&& echo "http://purl.uniprot.org/core/" > uniprot_core.rdf.graph
 
+curl --stderr - -LH "Accept: application/rdf+xml" -o go.rdf "http://purl.obolibrary.org/obo/go.owl" \
+	&& echo "http://purl.obolibrary.org/obo/go.owl" > go.rdf.graph
+
 gzip -9 *.rdf
