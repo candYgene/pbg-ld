@@ -16,7 +16,7 @@ docker build -t vos .
 ```
 tar xvzf ../data/sgn-ld.tar.gz -C ../data
 mv ../data/rdf/* .
-docker exec vlpb make all
+docker exec vlpb make all # check virtuoso.log for potential errors
 ```
 
 **4. [Login](http://localhost:8890/conductor) to running Virtuoso instance for admin tasks.**
