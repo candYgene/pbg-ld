@@ -3,7 +3,8 @@
 # Batch script to download (compressed) data in RDF and to write graph URIs into *.graph files
 # required for loading RDF into Virtuoso RDF Quad Store.
 
-ENSEMBL_VERSION=33
+ENSEMBLPLANTS_RELEASE=33
+#UNIPROT_RELEASE=2016_11
 
 # download ontologies
 curl --stderr - -LH "Accept: application/rdf+xml" -o faldo.rdf "http://biohackathon.org/resource/faldo.rdf" \
@@ -27,10 +28,10 @@ curl --stderr - -LH "Accept: application/rdf+xml" -o go.rdf "http://purl.obolibr
 gzip -9 *.rdf
 
 # download tomato genome and proteome from Ensembl Plants and UniProt Reference Proteomes, respectively
-curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBL_VERSION}/rdf/solanum_lycopersicum/solanum_lycopersicum.ttl.gz" \
+curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum.ttl.gz" \
 	&& echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum.ttl.graph
 
-curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBL_VERSION}/rdf/solanum_lycopersicum/solanum_lycopersicum_xrefs.ttl.gz" \
+curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum_xrefs.ttl.gz" \
 	&& echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum_xrefs.ttl.graph
 
 curl --stderr - -L -o uniprot_tomato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000004994" \
