@@ -25,6 +25,18 @@ curl --stderr - -LH "Accept: application/rdf+xml" -o uniprot_core.rdf "http://pu
 curl --stderr - -LH "Accept: application/rdf+xml" -o go.rdf "http://purl.obolibrary.org/obo/go.owl" \
 	&& echo "http://purl.obolibrary.org/obo/go.owl" > go.rdf.graph
 
+curl --stderr - -LH "Accept: application/rdf+xml" -o po.rdf "http://purl.obolibrary.org/obo/po.owl" \
+        && echo "http://purl.obolibrary.org/obo/po.owl" > po.rdf.graph
+
+curl --stderr - -LH "Accept: application/rdf+xml" -o to.rdf "http://purl.obolibrary.org/obo/to.owl" \
+        && echo "http://purl.obolibrary.org/obo/to.owl" > to.rdf.graph
+
+curl --stderr - -LH "Accept: application/rdf+xml" -o pato.rdf "http://purl.obolibrary.org/obo/pato.owl" \
+        && echo "http://purl.obolibrary.org/obo/pato.owl" > pato.rdf.graph
+
+curl --stderr - -LH "Accept: application/rdf+xml" -o spto.rdf "http://data.bioontology.org/ontologies/SPTO/download?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb&download_format=rdf" \
+        && echo "http://purl.bioontology.org/ontology/SPTO" > spto.rdf.graph
+
 gzip -9 *.rdf
 
 # download tomato genome and proteome from Ensembl Plants and UniProt Reference Proteomes, respectively
