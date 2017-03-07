@@ -32,13 +32,18 @@ RDF graphs:IRIs (_A-Box_)
     * `http://solgenomics.net/genome/Solanum_pennellii`
   * Ensembl: `http://plants.ensembl.org/Solanum_lycopersicum`
   * UniProt: `http://www.uniprot.org/proteomes/Solanum_lycopersicum`
+  * QTLs: `http://europepmc.org/articles`
 
 RDF graphs:IRIs (_T-Box_)
   * FALDO: `http://biohackathon.org/resource/faldo.rdf`
   * SO[FA]: `http://purl.obolibrary.org/obo/so.owl`
   * SIO: `http://semanticscience.org/ontology/sio.owl`
   * RO: `http://purl.obolibrary.org/obo/ro.owl`
-  * UniProt Core: `http://purl.uniprot.org/core/`
   * GO: `http://purl.obolibrary.org/obo/go.owl`
-  
+  * UniProt Core: `http://purl.uniprot.org/core/`
+  * PO: `http://purl.obolibrary.org/obo/po.owl`
+  * TO: `http://purl.obolibrary.org/obo/to.owl`
+  * SPTO: `http://purl.bioontology.org/ontology/SPTO`
+  * PATO: `http://purl.obolibrary.org/obo/pato.owl`
+
 For further details visit the [wiki](https://github.com/DTL-FAIRData/ODEX4all-UseCases/wiki/VLPB) page.
