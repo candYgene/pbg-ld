@@ -5,8 +5,8 @@
 SET u{BASE_URI} http://localhost:8890 ;
 SET u{ENSEMBL_RELEASE} 33 ;
 SET u{ENSEMBL_G_URI} http://plants.ensembl.org/Solanum_lycopersicum ;
-SET u{SGN_G_URI} http://solgenomics.net/genome/Solanum_lycopersicum ;
-
+SET u{SGN-SL_G_URI} http://solgenomics.net/genome/Solanum_lycopersicum ;
+SET u{SGN-SP_G_URI} http://solgenomics.net/genome/Solanum_pennellii ;
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -77,7 +77,7 @@ INSERT INTO <$u{ENSEMBL_G_URI}> {
    ?chr2 a obo:SO_0000340
 }  
 WHERE {
-   GRAPH <$u{SGN_G_URI}> {
+   GRAPH <$u{SGN-SL_G_URI}> {
       ?chr1 a obo:SO_0000340 .
       BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/$u{ENSEMBL_RELEASE}/solanum_lycopersicum/SL2.50/', replace(str(?chr1), '.+ch0?', ''))) AS ?chr2)
    }
@@ -104,11 +104,11 @@ WHERE {
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-INSERT INTO <$u{SGN_G_URI}> {
+INSERT INTO <$u{SGN-SL_G_URI}> {
    ?chr1 owl:sameAs ?chr2
 }   
 WHERE {
-   GRAPH <$u{SGN_G_URI}> {
+   GRAPH <$u{SGN-SL_G_URI}> {
       ?chr1 a obo:SO_0000340 .
       BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/$u{ENSEMBL_RELEASE}/solanum_lycopersicum/SL2.50/', replace(str(?chr1), '.+ch0?', ''))) AS ?chr2)
    }
@@ -119,7 +119,7 @@ WHERE {
 --
 --SPARQL
 --PREFIX owl: <http://www.w3.org/2002/07/owl#>
---WITH  <$u{SGN_G_URI}>
+--WITH  <$u{SGN-SL_G_URI}>
 --DELETE WHERE { ?s owl:sameAs ?o } ;
 
 
@@ -131,7 +131,7 @@ SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX sgn-chr: <$u{BASE_URI}/genome/Solanum_lycopersicum/chromosome/>
 PREFIX ena: <http://identifiers.org/ena.embl/>
-INSERT INTO <$u{SGN_G_URI}> {
+INSERT INTO <$u{SGN-SL_G_URI}> {
    sgn-chr:SL2.50ch01 rdfs:seeAlso ena:CM001064.2 .
    sgn-chr:SL2.50ch02 rdfs:seeAlso ena:CM001065.2 .
    sgn-chr:SL2.50ch03 rdfs:seeAlso ena:CM001066.2 .
@@ -152,7 +152,7 @@ INSERT INTO <$u{SGN_G_URI}> {
 --SPARQL
 --PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 --PREFIX ena: <http://identifiers.org/ena.embl/>
---WITH <$u{SGN_G_URI}>
+--WITH <$u{SGN-SL_G_URI}>
 --DELETE { ?s rdfs:seeAlso ?o }
 --WHERE { ?s rdfs:seeAlso ?o . FILTER regex(?o, ena:) } ;
 
@@ -169,11 +169,11 @@ INSERT INTO <$u{SGN_G_URI}> {
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-INSERT INTO <$u{SGN_G_URI}> {
+INSERT INTO <$u{SGN-SL_G_URI}> {
    ?gene1 owl:sameAs ?gene2
 }
 WHERE {  
-   GRAPH <$u{SGN_G_URI}> {
+   GRAPH <$u{SGN-SL_G_URI}> {
       ?gene1 a obo:SO_0001217 .
       BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/', replace(str(?gene1), '.+/', ''))) AS ?gene2)
    }
@@ -187,7 +187,7 @@ WHERE {
 --
 --SPARQL
 --PREFIX owl: <http://www.w3.org/2002/07/owl#>
---WITH  <$u{SGN_G_URI}>
+--WITH  <$u{SGN-SL_G_URI}>
 --DELETE WHERE { ?gene1 owl:sameAs ?gene2 } ;
 
 
@@ -201,7 +201,7 @@ INSERT INTO <$u{ENSEMBL_G_URI}> {
    ?chr2 a obo:SO_0000120
 }  
 WHERE {
-   GRAPH <$u{SGN_G_URI}> {
+   GRAPH <$u{SGN-SL_G_URI}> {
       ?chr1 a obo:SO_0000120 .
       BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl.transcript/', replace(str(?chr1), '.+/', ''))) AS ?chr2)
    }
@@ -239,11 +239,11 @@ WHERE { ?s a obo:SO_0000120 } ;
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-INSERT INTO <$u{SGN_G_URI}> {
+INSERT INTO <$u{SGN-SL_G_URI}> {
    ?chr1 owl:sameAs ?chr2
 }   
 WHERE {
-   GRAPH <$u{SGN_G_URI}> {
+   GRAPH <$u{SGN-SL_G_URI}> {
       ?chr1 a obo:SO_0000120 .
       BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl.transcript/', replace(str(?chr1), '.+/', ''))) AS ?chr2)
    }
@@ -254,5 +254,45 @@ WHERE {
 --
 --SPARQL
 --PREFIX owl: <http://www.w3.org/2002/07/owl#>
---WITH  <$u{SGN_G_URI}>
+--WITH  <$u{SGN-SL_G_URI}>
 --DELETE WHERE { ?s owl:sameAs ?o } ;
+
+
+--
+-- Link SGN markers common to both tomato species
+--
+
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX sio: <http://semanticscience.org/resource/>
+INSERT INTO <$u{SGN-SL_G_URI}> {
+   ?marker_sl sio:SIO_000558 ?marker_sp
+}
+WHERE {
+   GRAPH <$u{SGN-SL_G_URI}> {
+      ?marker_sl a obo:SO_0001645 ;
+         rdfs:comment ?aliases_sl ;
+         dct:identifier ?marker_sl_id .
+   }
+   GRAPH <$u{SGN-SP_G_URI}> {
+      ?marker_sp a obo:SO_0001645 ;
+         rdfs:comment ?aliases_sp ;
+         dct:identifier ?marker_sp_id .
+   }
+   BIND(bif:strcontains(?aliases_sl, str(?marker_sp_id)) AS ?match)
+   FILTER(?match = 1)
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX obo: <http://purl.obolibrary.org/obo/>
+--PREFIX sio: <http://semanticscience.org/resource/>
+--WITH  <$u{SGN-SL_G_URI}>
+--DELETE WHERE {
+--   ?s a obo:SO_0001645 ;
+--      sio:SIO_000558 ?o
+--} ;
