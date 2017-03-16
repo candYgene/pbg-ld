@@ -7,6 +7,7 @@ SET u{ENSEMBL_RELEASE} 33 ;
 SET u{ENSEMBL_G_URI} http://plants.ensembl.org/Solanum_lycopersicum ;
 SET u{SGN-SL_G_URI} http://solgenomics.net/genome/Solanum_lycopersicum ;
 SET u{SGN-SP_G_URI} http://solgenomics.net/genome/Solanum_pennellii ;
+SET u{EPMC_G_URI} http://europepmc.org/articles ;
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
@@ -296,3 +297,70 @@ WHERE {
 --   ?s a obo:SO_0001645 ;
 --      sio:SIO_000558 ?o
 --} ;
+
+
+--
+-- Pre-compute QTLs' chromosomal locations based on flanking/peak markers' positions.
+-- Note: If there are more than two markers per QTL, take the longest region delineated by the markers.
+--
+
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+PREFIX sgn-sly: <$u{BASE_URI}/genome/Solanum_lycopersicum/>
+INSERT INTO <http://europepmc.org/articles> {
+   ?qtl faldo:location ?qtl_loc .
+   ?qtl_loc a faldo:Region ;
+      rdfs:label ?chr_loc ;
+      faldo:begin ?qtl_begin ;
+      faldo:end ?qtl_end
+}
+WHERE {
+   SELECT
+      ?qtl
+      concat(?chr_lb, ':', ?min_begin, '-', ?max_end) AS ?chr_loc
+      uri(concat(?chr, '#', ?min_begin, '-', ?max_end)) AS ?qtl_loc
+      uri(concat(?chr, '#', ?min_begin)) AS ?qtl_begin
+      uri(concat(?chr, '#', ?max_end)) AS ?qtl_end
+   WHERE {
+      SELECT
+         ?qtl
+         ?chr_lb
+         min(?begin_pos) AS ?min_begin
+         max(?end_pos) AS ?max_end
+         uri(concat(sgn-sly:, replace(GROUP_CONCAT(DISTINCT ?chr_lb, ''), '\\s+', '/'))) AS ?chr
+      WHERE {
+         GRAPH <$u{EPMC_G_URI}> {
+            ?qtl a obo:SO_0000771 ;
+               obo:RO_0002610 ?marker ;
+               dct:identifier ?qtl_id .
+            ?marker a obo:SO_0001645
+         }
+         GRAPH <http://solgenomics.net/genome/Solanum_lycopersicum> {
+            ?marker faldo:location ?loc .
+            ?loc faldo:begin ?begin ;
+                 faldo:end/faldo:position ?end_pos .
+            ?begin faldo:position ?begin_pos ;
+               faldo:reference/rdfs:label ?chr_lb
+         }
+      }
+      GROUP BY ?qtl ?chr_lb
+   }
+}
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+--WITH <$u{EPMC_G_URI}>
+--DELETE WHERE {
+--  ?qtl faldo:location ?qtl_loc .
+--  ?qtl_loc a faldo:Region ;
+--     rdfs:label ?chr_loc ;
+--     faldo:begin ?qtl_begin ;
+--     faldo:end ?qtl_end
+--}
