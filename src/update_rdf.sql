@@ -348,7 +348,7 @@ WHERE {
       }
       GROUP BY ?qtl ?chr_lb
    }
-}
+} ;
 
 --
 -- Delete triples
@@ -362,4 +362,4 @@ WHERE {
 --     rdfs:label ?chr_loc ;
 --     faldo:begin ?qtl_begin ;
 --     faldo:end ?qtl_end
---}
+--} ;
