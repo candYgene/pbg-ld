@@ -21,11 +21,10 @@ WHERE {
 } ;
 
 SPARQL
-PREFIX sio: <http://semanticscience.org/resource/>
 WITH <$u{ENSEMBL_G_URI}>
-DELETE { ?s sio:SIO:000630 ?o }
-INSERT { ?s sio:SIO_000630 ?o }
-WHERE { ?s sio:SIO:000630 ?o } ;
+DELETE { ?s <http://semanticscience.org/resource/SIO:000630> ?o }
+INSERT { ?s <http://semanticscience.org/resource/SIO_000630> ?o }
+WHERE { ?s <http://semanticscience.org/resource/SIO:000630> ?o } ;
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
