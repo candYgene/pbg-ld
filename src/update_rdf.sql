@@ -338,7 +338,7 @@ WHERE {
                dct:identifier ?qtl_id .
             ?marker a obo:SO_0001645
          }
-         GRAPH <http://solgenomics.net/genome/Solanum_lycopersicum> {
+         GRAPH <$u{SGN-SL_G_URI}> {
             ?marker faldo:location ?loc .
             ?loc faldo:begin ?begin ;
                  faldo:end/faldo:position ?end_pos .
@@ -362,4 +362,59 @@ WHERE {
 --     rdfs:label ?chr_loc ;
 --     faldo:begin ?qtl_begin ;
 --     faldo:end ?qtl_end
+--} ;
+
+--
+-- Add genes that overlap with QTLs on the reference genome.
+--
+
+SPARQL
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
+PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+INSERT INTO <$u{EPMC_G_URI}> {
+  ?qtl so:overlaps ?gene
+}
+WHERE {
+   GRAPH <$u{EPMC_G_URI}> {
+      ?qtl a obo:SO_0000771 ;
+         faldo:location ?loc ;
+         obo:RO_0003308 ?trait .
+      ?loc faldo:begin ?begin ;
+         faldo:end ?end
+   }
+   GRAPH <$u{SGN-SL_G_URI}> {
+      ?begin faldo:position ?begin_pos ;
+         faldo:reference ?chr .
+      ?end faldo:position ?end_pos .
+   }
+   GRAPH <$u{SGN-SL_G_URI}> {
+      ?loc2 faldo:begin ?begin2 ;
+         faldo:end ?end2 ;
+         ^faldo:location ?gene .
+      ?gene a obo:SO_0001217 .
+      ?begin2 faldo:position ?begin_pos2 ;
+         faldo:reference ?chr2 .
+      ?end2 faldo:position ?end_pos2 .
+   }
+   FILTER(?chr = ?chr2)
+   FILTER((xsd:integer(?begin_pos) > xsd:integer(?begin_pos2) &&
+           xsd:integer(?begin_pos) < xsd:integer(?end_pos2)) ||
+          (xsd:integer(?end_pos) > xsd:integer(?begin_pos2) &&
+           xsd:integer(?end_pos) < xsd:integer(?end_pos2)) ||
+          (xsd:integer(?begin_pos) < xsd:integer(?begin_pos2) &&
+          xsd:integer(?end_pos) > xsd:integer(?end_pos2)) ||
+          xsd:integer(?begin_pos) > xsd:integer(?begin_pos2) &&
+          xsd:integer(?end_pos) < xsd:integer(?end_pos2))
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX so: <http://purl.obolibrary.org/obo/so#>
+--WITH <$u{EPMC_G_URI}>
+--DELETE WHERE {
+--  ?qtl so:overlaps ?gene
 --} ;
