@@ -418,3 +418,35 @@ WHERE {
 --DELETE WHERE {
 --  ?qtl so:overlaps ?gene
 --} ;
+
+
+--
+-- Link QTLs to SGN's genome browser (JBrowse).
+--
+
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+INSERT INTO <$u{EPMC_G_URI}> {
+   ?loc rdfs:seeAlso ?jbrowse
+}
+WHERE {
+   GRAPH <$u{EPMC_G_URI}> {
+      ?loc a faldo:Region ;
+         rdfs:label ?loc_lb .
+      BIND(uri(concat('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/SL2.50&loc=', replace(replace(?loc_lb, '.+\\s+', ''), '-', '..'), '&tracks=DNA,gene_models')) AS ?jbrowse)
+   }
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+--PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+--WITH <$u{EPMC_G_URI}>
+--DELETE { ?loc rdfs:seeAlso ?jbrowse }
+--WHERE {
+--   ?loc rdfs:seeAlso ?jbrowse ;
+--      a faldo:Region
+--} ;
