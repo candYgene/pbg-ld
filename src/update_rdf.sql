@@ -2,6 +2,7 @@
 -- Fix database cross-references in EnsemblPlants RDF graph.
 --
 
+log_enable(2) ; -- disable transaction logging & enable row-by-row autocommit
 SET u{BASE_URI} http://localhost:8890 ;
 SET u{ENSEMBL_RELEASE} 33 ;
 SET u{ENSEMBL_G_URI} http://plants.ensembl.org/Solanum_lycopersicum ;
