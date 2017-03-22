@@ -21,7 +21,7 @@ rdf_loader_run(log_enable=>$u{LOG_LEVEL}) ;
 --SPARQL SELECT
 --   ?g COUNT(*) AS ?n
 --WHERE {
---   GRAPH ?g { ?s ?p ?o } .
+--   GRAPH ?g { ?s ?p ?o }
 --}
 --GROUP BY ?g
 --ORDER BY DESC(?n) ;
