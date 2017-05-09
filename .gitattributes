@@ -1,1 +1,2 @@
 *.sh linguist-vendored=true
+*file linguist-vendored=true
