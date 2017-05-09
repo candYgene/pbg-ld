@@ -1,1 +1,1 @@
-src/*.sh linguist-vendored=true
+*.sh linguist-vendored=true
