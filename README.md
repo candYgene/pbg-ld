@@ -46,4 +46,4 @@ RDF graphs:IRIs (_T-Box_)
   * SPTO: `http://purl.bioontology.org/ontology/SPTO`
   * PATO: `http://purl.obolibrary.org/obo/pato.owl`
 
-For further details visit the [wiki](https://github.com/DTL-FAIRData/ODEX4all-UseCases/wiki/VLPB) page.
+Further details can be found on the [wiki](https://github.com/candYgene/pbg-ld/wiki/VLPB).
