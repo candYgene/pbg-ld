@@ -1,25 +1,38 @@
-# Tomato [SGN](https://solgenomics.net/) Linked Data deployment
+# Linked Data Platform for Plant Breeding & Genomics
 
-**1. Build a [Docker](https://www.docker.com/) container with [Virtuoso Universal Server](http://virtuoso.openlinksw.com/) (open source edition).**
+This software provides semantically integrated genotypic/phenotypic data on plants to enable ranking of candidate genes associated with traits of interest (e.g. fruit ripening in tomato).
+
+**1. Clone this git repo.**
 
 ```
-cd src
-docker build -t vos .
+git clone --recursive https://github.com/candYgene/pbg-ld.git
+cd pbg-ld
 ```
+
+**2. Pull pre-built Docker image with [Virtuoso Universal Server](http://virtuoso.openlinksw.com/) from the [Docker Hub](https://hub.docker.com) registry.**
+
+`docker pull candygene/docker-virtuoso`
+
+Alternatively, you can build the image locally.
+
+`docker build -t candygene/docker-virtuoso docker-virtuoso`
 
 **2. Start the Virtuoso server.**
 
-`docker run --name sgn-ld -v $PWD:/tmp/share -p 8890:8890 -d vos`
+```
+cd src
+docker run --name pbg-ld -v $PWD:/tmp/share -p 8890:8890 -d candygene/docker-virtuoso
+```
 
 **3. Prepare & ingest RDF data.**
 
 ```
 tar xvzf ../data/sgn-ld.tar.gz -C ../data
 mv ../data/rdf/* .
-docker exec sgn-ld make all # check virtuoso.log for potential errors
+docker exec pbg-ld make all # check virtuoso.log for potential errors
 ```
 (other `make` rules: `install-pkgs`, `import-rdf`, `update-rdf`, `post-install`, `clean`)
- 
+
 **4. [Login](http://localhost:8890/conductor) to running Virtuoso instance for admin tasks.**
 
 Use `dba` for both account name and password.
