@@ -1,0 +1,13 @@
+sudo: required
+services:
+  - docker
+before_install:
+  - cd src
+  - tar xvzf ../data/*.tar.gz -C ../data && mv ../data/rdf/* .
+  - docker pull candygene/docker-virtuoso
+  - docker run --name pbg-ld -v $PWD:/tmp/share -p 8890:8890 -d candygene/docker-virtuoso
+  - docker ps -a
+install:
+  - docker exec pbg-ld make all
+script:
+  - cat virtuoso.log
