@@ -17,14 +17,14 @@ Alternatively, you can build the image locally.
 
 `docker build -t candygene/docker-virtuoso docker-virtuoso`
 
-**2. Start the Virtuoso server.**
+**3. Start the Virtuoso server.**
 
 ```
 cd src
 docker run --name pbg-ld -v $PWD:/tmp/share -p 8890:8890 -d candygene/docker-virtuoso
 ```
 
-**3. Prepare & ingest RDF data.**
+**4. Prepare & ingest RDF data.**
 
 ```
 tar xvzf ../data/sgn-ld.tar.gz -C ../data
@@ -33,11 +33,11 @@ docker exec pbg-ld make all # check virtuoso.log for potential errors
 ```
 (other `make` rules: `install-pkgs`, `import-rdf`, `update-rdf`, `post-install`, `clean`)
 
-**4. [Login](http://localhost:8890/conductor) to running Virtuoso instance for admin tasks.**
+**5. [Login](http://localhost:8890/conductor) to running Virtuoso instance for admin tasks.**
 
 Use `dba` for both account name and password.
 
-**5. Run queries via Virtuoso [SPARQL endpoint](http://localhost:8890/sparql) or browse data via [Faceted Browser](http://localhost:8890/fct/) (no login required).**
+**6. Run queries via Virtuoso [SPARQL endpoint](http://localhost:8890/sparql) or browse data via [Faceted Browser](http://localhost:8890/fct/) (no login required).**
 
 RDF graphs:IRIs (_A-Box_)
   * SGN:
