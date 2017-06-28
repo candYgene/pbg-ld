@@ -7,7 +7,7 @@ set -ev
 
 ENSEMBLPLANTS_RELEASE=33
 #UNIPROT_RELEASE=2016_11
-DATA_DIR=$PWD/data
+DATA_DIR=data
 
 mkdir -p $DATA_DIR && cd $DATA_DIR
 
@@ -52,4 +52,4 @@ curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPL
 curl --stderr - -L -o uniprot_tomato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000004994" \
 	&& echo "http://www.uniprot.org/proteomes/Solanum_lycopersicum" > uniprot_tomato.rdf.graph
 
-gzip *.{ttl,rdf}
+gzip *.rdf
