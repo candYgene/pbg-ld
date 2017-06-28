@@ -7,9 +7,11 @@ set -ev
 
 ENSEMBLPLANTS_RELEASE=33
 #UNIPROT_RELEASE=2016_11
-DATA_DIR=data
+DATA_DIR=$1
 
-mkdir -p $DATA_DIR && cd $DATA_DIR
+if [ "${DATA_DIR}" != "" ]; then
+	mkdir -p $DATA_DIR && cd $DATA_DIR
+fi
 
 # download ontologies
 curl --stderr - -LH "Accept: application/rdf+xml" -o faldo.rdf "http://biohackathon.org/resource/faldo.rdf" \
