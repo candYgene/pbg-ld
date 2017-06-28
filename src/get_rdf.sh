@@ -7,6 +7,9 @@ set -ev
 
 ENSEMBLPLANTS_RELEASE=33
 #UNIPROT_RELEASE=2016_11
+DATA_DIR=$PWD/data
+
+mkdir -p $DATA_DIR && cd $DATA_DIR
 
 # download ontologies
 curl --stderr - -LH "Accept: application/rdf+xml" -o faldo.rdf "http://biohackathon.org/resource/faldo.rdf" \
@@ -39,8 +42,6 @@ curl --stderr - -LH "Accept: application/rdf+xml" -o pato.rdf "http://purl.oboli
 curl --stderr - -LH "Accept: application/rdf+xml" -o spto.rdf "http://data.bioontology.org/ontologies/SPTO/download?apikey=8b5b7825-538d-40e0-9e9e-5ab9274a9aeb&download_format=rdf" \
         && echo "http://purl.bioontology.org/ontology/SPTO" > spto.rdf.graph
 
-gzip -9 *.rdf
-
 # download tomato genome and proteome from Ensembl Plants and UniProt Reference Proteomes, respectively
 curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum.ttl.gz" \
 	&& echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum.ttl.graph
@@ -50,3 +51,5 @@ curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPL
 
 curl --stderr - -L -o uniprot_tomato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000004994" \
 	&& echo "http://www.uniprot.org/proteomes/Solanum_lycopersicum" > uniprot_tomato.rdf.graph
+
+gzip *.{ttl,rdf}

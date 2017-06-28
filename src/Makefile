@@ -3,6 +3,7 @@
 VOS_USER = dba
 VOS_PASS = dba
 VOS_PORT = 1111
+VOS_SHARE = /tmp/share
 VOS = isql $(VOS_PORT) $(VOS_USER) $(VOS_PASS) verbose=off errors=stdout
 DOCKER_IMAGE = candygene/docker-virtuoso
 CONTAINER_NAME = virtuoso
@@ -14,7 +15,7 @@ pull-image:
 	docker pull $(DOCKER_IMAGE)
 
 start-srv:
-	docker run --name $(CONTAINER_NAME) -v $(PWD):/tmp/share -p $(CONTAINER_PORT):8890 -d $(DOCKER_IMAGE)
+	docker run --name $(CONTAINER_NAME) -v $(PWD):$(VOS_SHARE) -p $(CONTAINER_PORT):8890 -d $(DOCKER_IMAGE)
 	sleep 10
 	docker ps -a
 
@@ -34,7 +35,7 @@ get-rdf:
 
 import-rdf:
 	tar xvzf ../data/*.tar.gz -C ../data
-	mv ../data/rdf/* .
+	mv ../data/rdf/* data
 	docker exec $(CONTAINER_NAME) $(VOS) import_rdf.sql
 
 update-rdf:
