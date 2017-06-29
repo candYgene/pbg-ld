@@ -1,3 +1,0 @@
-[submodule "docker-virtuoso"]
-	path = docker-virtuoso
-	url = https://github.com/candYgene/docker-virtuoso
