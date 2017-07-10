@@ -6,7 +6,7 @@ This software provides semantically integrated genotypic/phenotypic data on plan
 
 **1. Clone this git repo.**
 
-`git clone --recursive https://github.com/candYgene/pbg-ld.git`
+`git clone https://github.com/candYgene/pbg-ld.git`
 
 **2. Start a [Docker container](https://hub.docker.com/r/candygene/docker-virtuoso/) with [Virtuoso Universal Server](http://virtuoso.openlinksw.com/) & ingest data in [RDF](https://www.w3.org/RDF/).**
 
