@@ -8,17 +8,21 @@ This software provides semantically integrated genotypic/phenotypic data on plan
 
 `git clone https://github.com/candYgene/pbg-ld.git`
 
-**2. Start a [Docker container](https://hub.docker.com/r/candygene/docker-virtuoso/) with [Virtuoso Universal Server](http://virtuoso.openlinksw.com/) & ingest data in [RDF](https://www.w3.org/RDF/).**
+**2. Build a [Docker container](https://hub.docker.com/r/candygene/docker-virtuoso/) with [Virtuoso Universal Server](http://virtuoso.openlinksw.com/) & loaded data in [RDF](https://www.w3.org/RDF/).**
 
 ```
-cd pbg-ld/src
-make all # with defaults: CONTAINER_NAME=virtuoso and CONTAINER_PORT=8890 (in development)
-make -e all CONTAINER_NAME=pbg-ld CONTAINER_PORT=80 # override defaults (in production)
+docker build -t myvirtuoso .
 ```
 
-Note: other `make` rules: `pull-image`, `build-image`, `start-srv`, `stop-srv`, `restart-srv`, `install-pkgs`, `get-rdf`, `import-rdf`, `update-rdf`, `post-install` and `clean`.
+Note: building the container may take some time, as it must download the data, but once built, it will contain all your data and you can start it straight away. (Arnold: put the container in Dockerhub and then build time is irrelevant).
 
-**3. [Login](http://localhost:8890/conductor) to running Virtuoso instance for admin tasks.**
+**3. Start your container.**
+
+```
+docker run -it --rm -p 8890:8890 myvirtuoso
+```
+
+**4. [Login](http://localhost:8890/conductor) to running Virtuoso instance for admin tasks.**
 
 Use `dba` for both account name and password.
 
