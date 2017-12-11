@@ -16,7 +16,7 @@ pull-image:
 	docker pull $(DOCKER_IMAGE)
 
 start-srv:
-	docker run --name $(CONTAINER_NAME) -v $(PWD):$(VOS_SHARE) -p $(CONTAINER_PORT):8890 -d $(DOCKER_IMAGE)
+	docker run --name $(CONTAINER_NAME) -v "$(PWD):$(VOS_SHARE)" -p $(CONTAINER_PORT):8890 -d $(DOCKER_IMAGE)
 	sleep 20
 	docker ps -a
 
