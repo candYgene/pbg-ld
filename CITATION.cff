@@ -1,0 +1,22 @@
+# YAML 1.2
+# Metadata for citation of this software according to the CFF format (https://citation-file-format.github.io/)
+cff-version: 1.0.3
+message: If you use this software, please cite it as below.
+# FIXME title as repository name might not be the best name, please make human readable
+title: Linked Data Platform for Plant Breeding & Genomics (pbg-ld)
+# FIXME splitting of full names is error prone, please check if given/family name are correct
+authors:
+- given-names: Arnold
+  family-names: Kuzniar
+  affiliation: Netherlands eScience Center
+  orcid: https://orcid.org/0000-0003-1711-7961
+- given-names: Gurnoor
+  family-names: Singh
+  affiliation: Wageningen Universit
+  orcid: https://orcid.org/0000-0003-1615-4197
+- given-names: Carlos
+  family-names: Martinez-Ortiz
+  affiliation: Netherlands eScience Center
+date-released: '2017-12-11'
+repository-code: https://github.com/candYgene/pbg-ld/commit/e854a050061eb3236d6a4cfd862767387903f90e
+license: Apache-2.0
