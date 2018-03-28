@@ -20,4 +20,5 @@ authors:
 date-released: 2017-12-11
 commit: e854a050061eb3236d6a4cfd862767387903f90e
 repository-code: https://github.com/candYgene/pbg-ld
+version: prerelease
 license: Apache-2.0
