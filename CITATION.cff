@@ -17,6 +17,6 @@ authors:
 - given-names: Carlos
   family-names: Martinez-Ortiz
   affiliation: Netherlands eScience Center
-date-released: '2017-12-11'
+date-released: 2017-12-11
 repository-code: https://github.com/candYgene/pbg-ld/commit/e854a050061eb3236d6a4cfd862767387903f90e
 license: Apache-2.0
