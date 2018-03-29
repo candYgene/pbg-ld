@@ -8,7 +8,7 @@ authors:
     given-names: Arnold
     orcid: "https://orcid.org/0000-0003-1711-7961"
   - 
-    affiliation: "Wageningen Universit"
+    affiliation: "Wageningen University"
     family-names: Singh
     given-names: Gurnoor
     orcid: "https://orcid.org/0000-0003-1615-4197"
@@ -20,7 +20,7 @@ cff-version: "1.0.3"
 commit: e854a050061eb3236d6a4cfd862767387903f90e
 date-released: 2017-12-11
 license: Apache-2.0
-message: "If you use this software, please cite it as below."
+message: "If you use this software, please cite it using these metadata."
 repository-code: "https://github.com/candYgene/pbg-ld"
 title: "Linked Data Platform for Plant Breeding & Genomics (pbg-ld)"
 version: prerelease
