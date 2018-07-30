@@ -25,22 +25,22 @@ try:
             GRAPH ?g { ?s ?p ?o }
         }
         GROUP BY ?g
-        ORDER BY DESC(?n)
     """)
     sparql.setReturnFormat(JSON)
     res = sparql.query().convert()
 
     for r in res["results"]["bindings"]:
         g = r['g']['value']
-        n = r['n']['value']
+        n = int(r['n']['value'])
         if g in graphs:
             graphs[g] = n
 except:
-    sys.exit("Couldn't connect to the SPARQL endpoint '{0}'.".format(endpoint))
+    sys.exit("Failed to connect to the SPARQL endpoint '{0}'.".format(endpoint))
 
 exit_code = 0
 std = sys.stdout
-for g,n in graphs.items():
+
+for g,n in sorted(graphs.items(), key=lambda x: x[1], reverse=True):
     if n == 0:
         exit_code = 1
         std = sys.stderr
