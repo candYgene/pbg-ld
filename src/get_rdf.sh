@@ -26,7 +26,7 @@ curl --stderr - -LH "Accept: application/rdf+xml" -o sio.rdf "http://semanticsci
 curl --stderr - -LH "Accept: application/rdf+xml" -o ro.rdf "http://purl.obolibrary.org/obo/ro.owl" \
 	&& echo "http://purl.obolibrary.org/obo/ro.owl" > ro.rdf.graph
 
-curl --stderr - -LH "Accept: application/rdf+xml" -o uniprot_core.rdf "http://purl.uniprot.org/core/" \
+curl --stderr - -o uniprot_core.rdf "ftp://ftp.uniprot.org/pub/databases/uniprot/current_release/rdf/core.owl" \
 	&& echo "http://purl.uniprot.org/core/" > uniprot_core.rdf.graph
 
 curl --stderr - -LH "Accept: application/rdf+xml" -o go.rdf "http://purl.obolibrary.org/obo/go.owl" \
