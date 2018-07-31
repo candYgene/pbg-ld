@@ -311,7 +311,7 @@ PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
 PREFIX sgn-sly: <$u{BASE_URI}/genome/Solanum_lycopersicum/>
-INSERT INTO <http://europepmc.org/articles> {
+INSERT INTO <$u{EPMC_G_URI}> {
    ?qtl faldo:location ?qtl_loc .
    ?qtl_loc a faldo:Region ;
       rdfs:label ?chr_loc ;
