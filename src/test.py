@@ -40,9 +40,10 @@ except:
 exit_code = 0
 std = sys.stdout
 
+print("graph_uri\tn_triples\n")
 for g,n in sorted(graphs.items(), key=lambda x: x[1], reverse=True):
     if n == 0:
         exit_code = 1
         std = sys.stderr
-    print("{0} triples found in graph '{1}'.".format(n,g), file=std)
+    print("{0}\t{1}".format(g,n), file=std)
 sys.exit(exit_code)
