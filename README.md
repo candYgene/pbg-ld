@@ -1,6 +1,6 @@
 # Linked Data Platform for Plant Breeding & Genomics
 
-[![Build Status](https://travis-ci.org/candYgene/pbg-ld.svg?branch=master)](https://travis-ci.org/candYgene/pbg-ld)
+[![Build Status](https://travis-ci.org/candYgene/pbg-ld.svg?branch=dev)](https://travis-ci.org/candYgene/pbg-ld)
 
 This software provides semantically integrated genotypic/phenotypic data on plants to enable ranking of candidate genes associated with traits of interest (e.g. fruit ripening in tomato).
 
