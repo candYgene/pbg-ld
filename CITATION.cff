@@ -1,5 +1,3 @@
-# YAML 1.2
-# Metadata for citation of this software according to the CFF format (https://citation-file-format.github.io/)
 --- 
 authors: 
   - 
@@ -17,10 +15,16 @@ authors:
     family-names: Martinez-Ortiz
     given-names: Carlos
 cff-version: "1.0.3"
-commit: e854a050061eb3236d6a4cfd862767387903f90e
-date-released: 2017-12-11
+date-released: 2018-10-11
+doi: 10.0000/FIXME
+keywords: 
+  - "linked data"
+  - genomics
+  - "plant breeding"
+  - virtuoso
+  - SPARQL
 license: Apache-2.0
 message: "If you use this software, please cite it using these metadata."
 repository-code: "https://github.com/candYgene/pbg-ld"
 title: "Linked Data Platform for Plant Breeding & Genomics (pbg-ld)"
-version: prerelease
+version: "0.0.0-alpha0"
