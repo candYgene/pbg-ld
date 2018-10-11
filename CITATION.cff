@@ -10,19 +10,21 @@ authors:
     family-names: Singh
     given-names: Gurnoor
     orcid: "https://orcid.org/0000-0003-1615-4197"
-  - 
-    affiliation: "Netherlands eScience Center"
-    family-names: Martinez-Ortiz
-    given-names: Carlos
+  
 cff-version: "1.0.3"
 date-released: 2018-10-11
 doi: 10.0000/FIXME
 keywords: 
   - "linked data"
-  - genomics
-  - "plant breeding"
-  - virtuoso
+  - RDF
   - SPARQL
+  - Virtuoso
+  - genomics
+  - genotype
+  - phenotype
+  - traits
+  - "plant breeding"
+  - Solanaceae
 license: Apache-2.0
 message: "If you use this software, please cite it using these metadata."
 repository-code: "https://github.com/candYgene/pbg-ld"
