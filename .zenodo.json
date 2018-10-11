@@ -9,18 +9,19 @@
             "affiliation": "Wageningen University",
             "name": "Singh, Gurnoor",
             "orcid": "0000-0003-1615-4197"
-        },
-        {
-            "affiliation": "Netherlands eScience Center",
-            "name": "Martinez-Ortiz, Carlos"
         }
     ],
     "keywords": [
         "linked data",
+        "RDF",
+        "SPARQL",
+        "Virtuoso",
         "genomics",
+        "genotype",
+        "phenotype",
+        "traits",
         "plant breeding",
-        "virtuoso",
-        "SPARQL"
+        "Solanaceae"
     ],
     "license": {
         "id": "Apache-2.0"
