@@ -5,14 +5,21 @@
 log_enable(2) ; -- disable transaction logging & enable row-by-row autocommit
 SET u{BASE_URI} http://localhost:8890 ;
 SET u{ENSEMBL_RELEASE} 33 ;
-SET u{ENSEMBL_G_URI} http://plants.ensembl.org/Solanum_lycopersicum ;
+SET u{ENSEMBL-SL_G_URI} http://plants.ensembl.org/Solanum_lycopersicum ;
+SET u{ENSEMBL-ST_G_URI} http://plants.ensembl.org/Solanum_tuberosum ;
 SET u{SGN-SL_G_URI} http://solgenomics.net/genome/Solanum_lycopersicum ;
 SET u{SGN-SP_G_URI} http://solgenomics.net/genome/Solanum_pennellii ;
+SET u{SGN-ST_G_URI} http://solgenomics.net/genome/Solanum_tuberosum ;
 SET u{EPMC_G_URI} http://europepmc.org/articles ;
+
+
+--
+-- Update tomato RDF graphs
+--
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-WITH <$u{ENSEMBL_G_URI}>
+WITH <$u{ENSEMBL-SL_G_URI}>
 DELETE { ?s rdfs:seeAlso ?o }
 INSERT { ?s rdfs:seeAlso ?fixed }
 WHERE { 
@@ -22,7 +29,7 @@ WHERE {
 } ;
 
 SPARQL
-WITH <$u{ENSEMBL_G_URI}>
+WITH <$u{ENSEMBL-SL_G_URI}>
 DELETE { ?s <http://semanticscience.org/resource/SIO:000630> ?o }
 INSERT { ?s <http://semanticscience.org/resource/SIO_000630> ?o }
 WHERE { ?s <http://semanticscience.org/resource/SIO:000630> ?o } ;
@@ -30,7 +37,7 @@ WHERE { ?s <http://semanticscience.org/resource/SIO:000630> ?o } ;
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-WITH <$u{ENSEMBL_G_URI}>
+WITH <$u{ENSEMBL-SL_G_URI}>
 DELETE { ?s rdfs:seeAlso ?o }
 INSERT { ?s rdfs:seeAlso ?fixed }
 WHERE {
@@ -46,7 +53,7 @@ WHERE {
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
-WITH <$u{ENSEMBL_G_URI}>
+WITH <$u{ENSEMBL-SL_G_URI}>
 DELETE { ?s obo:SO_translates_to ?o }
 INSERT { ?s so:translates_to ?o }
 WHERE { ?s obo:SO_translates_to ?o } ;
@@ -54,7 +61,7 @@ WHERE { ?s obo:SO_translates_to ?o } ;
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
-WITH <$u{ENSEMBL_G_URI}>
+WITH <$u{ENSEMBL-SL_G_URI}>
 DELETE { ?s obo:SO_has_part ?o }
 INSERT { ?s so:has_part ?o }
 WHERE { ?s obo:SO_has_part ?o } ;
@@ -62,7 +69,7 @@ WHERE { ?s obo:SO_has_part ?o } ;
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
-WITH <$u{ENSEMBL_G_URI}>
+WITH <$u{ENSEMBL-SL_G_URI}>
 DELETE { ?s obo:SO_transcribed_from ?o }
 INSERT { ?s so:transcribed_from  ?o }
 WHERE { ?s obo:SO_transcribed_from ?o } ;
@@ -74,7 +81,7 @@ WHERE { ?s obo:SO_transcribed_from ?o } ;
 
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-INSERT INTO <$u{ENSEMBL_G_URI}> {
+INSERT INTO <$u{ENSEMBL-SL_G_URI}> {
    ?chr2 a obo:SO_0000340
 }  
 WHERE {
@@ -89,7 +96,7 @@ WHERE {
 --
 --SPARQL
 --PREFIX obo: <http://purl.obolibrary.org/obo/>
---WITH  <$u{ENSEMBL_G_URI}>
+--WITH  <$u{ENSEMBL-SL_G_URI}>
 --DELETE WHERE { ?s a obo:SO_0000340 } ;
 
 
@@ -107,7 +114,7 @@ PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 INSERT INTO <$u{SGN-SL_G_URI}> {
    ?chr1 owl:sameAs ?chr2
-}   
+}
 WHERE {
    GRAPH <$u{SGN-SL_G_URI}> {
       ?chr1 a obo:SO_0000340 .
@@ -178,7 +185,7 @@ WHERE {
       ?gene1 a obo:SO_0001217 .
       BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/', replace(str(?gene1), '.+/', ''))) AS ?gene2)
    }
-   GRAPH <$u{ENSEMBL_G_URI}> {
+   GRAPH <$u{ENSEMBL-SL_G_URI}> {
       ?gene2 a obo:SO_0001217
    }
 } ;
@@ -198,9 +205,9 @@ WHERE {
 
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-INSERT INTO <$u{ENSEMBL_G_URI}> {
+INSERT INTO <$u{ENSEMBL-SL_G_URI}> {
    ?chr2 a obo:SO_0000120
-}  
+}
 WHERE {
    GRAPH <$u{SGN-SL_G_URI}> {
       ?chr1 a obo:SO_0000120 .
@@ -213,7 +220,7 @@ WHERE {
 --
 --SPARQL
 --PREFIX obo: <http://purl.obolibrary.org/obo/>
---WITH  <$u{ENSEMBL_G_URI}>
+--WITH  <$u{ENSEMBL-SL_G_URI}>
 --DELETE WHERE { ?s a obo:SO_0000120 } ;
 
 
@@ -223,7 +230,7 @@ WHERE {
 
 SPARQL
 PREFIX obo: <http://purl.obolibrary.org/obo/>
-WITH  <$u{ENSEMBL_G_URI}>
+WITH  <$u{ENSEMBL-SL_G_URI}>
 DELETE { ?s a obo:SO_0000276 }
 WHERE { ?s a obo:SO_0000120 } ;
 
@@ -309,6 +316,7 @@ PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
 PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
 PREFIX sgn-sly: <$u{BASE_URI}/genome/Solanum_lycopersicum/>
 INSERT INTO <$u{EPMC_G_URI}> {
@@ -334,12 +342,402 @@ WHERE {
          uri(concat(sgn-sly:, replace(GROUP_CONCAT(DISTINCT ?chr_lb, ''), '\\s+', '/'))) AS ?chr
       WHERE {
          GRAPH <$u{EPMC_G_URI}> {
+            ?dts a dct:Dataset ;
+               so:genome_of obo:NCBITaxon_4081 ;
+               dct:hasPart ?qtl .
             ?qtl a obo:SO_0000771 ;
                obo:RO_0002610 ?marker ;
                dct:identifier ?qtl_id .
             ?marker a obo:SO_0001645
          }
          GRAPH <$u{SGN-SL_G_URI}> {
+            ?marker faldo:location ?loc .
+            ?loc faldo:begin ?begin ;
+               faldo:end/faldo:position ?end_pos .
+            ?begin faldo:position ?begin_pos ;
+               faldo:reference/rdfs:label ?chr_lb
+         }
+      }
+      GROUP BY ?qtl ?chr_lb
+   }
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+--WITH <$u{EPMC_G_URI}>
+--DELETE WHERE {
+--  ?qtl faldo:location ?qtl_loc .
+--  ?qtl_loc a faldo:Region ;
+--     rdfs:label ?chr_loc ;
+--     faldo:begin ?qtl_begin ;
+--     faldo:end ?qtl_end
+--} ;
+
+--
+-- Add genes that overlap with QTLs on the reference genome.
+--
+
+SPARQL
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
+PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+INSERT INTO <$u{EPMC_G_URI}> {
+   ?qtl so:overlaps ?gene
+}
+WHERE {
+   GRAPH <$u{EPMC_G_URI}> {
+      ?dts a dct:Dataset ;
+         so:genome_of obo:NCBITaxon_4081 ;
+         dct:hasPart ?qtl .
+      ?qtl a obo:SO_0000771 ;
+         faldo:location ?loc ;
+         obo:RO_0003308 ?trait .
+      ?loc faldo:begin ?begin ;
+         faldo:end ?end
+   }
+   GRAPH <$u{SGN-SL_G_URI}> {
+      ?begin faldo:position ?begin_pos ;
+         faldo:reference ?chr .
+      ?end faldo:position ?end_pos
+   }
+   GRAPH <$u{SGN-SL_G_URI}> {
+      ?loc2 faldo:begin ?begin2 ;
+         faldo:end ?end2 ;
+         ^faldo:location ?gene .
+      ?gene a obo:SO_0001217 .
+      ?begin2 faldo:position ?begin_pos2 ;
+         faldo:reference ?chr2 .
+      ?end2 faldo:position ?end_pos2
+   }
+   FILTER(?chr = ?chr2)
+   FILTER((xsd:integer(?begin_pos) > xsd:integer(?begin_pos2) &&
+     xsd:integer(?begin_pos) < xsd:integer(?end_pos2)) ||
+     (xsd:integer(?end_pos) > xsd:integer(?begin_pos2) &&
+     xsd:integer(?end_pos) < xsd:integer(?end_pos2)) ||
+     (xsd:integer(?begin_pos) < xsd:integer(?begin_pos2) &&
+     xsd:integer(?end_pos) > xsd:integer(?end_pos2)) ||
+     xsd:integer(?begin_pos) > xsd:integer(?begin_pos2) &&
+     xsd:integer(?end_pos) < xsd:integer(?end_pos2))
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX so: <http://purl.obolibrary.org/obo/so#>
+--WITH <$u{EPMC_G_URI}>
+--DELETE WHERE {
+--  ?qtl so:overlaps ?gene
+--} ;
+
+
+--
+-- Link QTLs to SGN's genome browser (JBrowse).
+--
+
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
+INSERT INTO <$u{EPMC_G_URI}> {
+   ?loc rdfs:seeAlso ?jbrowse
+}
+WHERE {
+   GRAPH <$u{EPMC_G_URI}> {
+      ?dts a dct:Dataset ;
+         so:genome_of obo:NCBITaxon_4081 ;
+         dct:hasPart ?qtl .
+      ?qtl faldo:location ?loc .
+      ?loc a faldo:Region ;
+         rdfs:label ?loc_lb .
+      BIND(uri(concat('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/SL2.50&loc=', replace(replace(?loc_lb, '.+\\s+', ''), '-', '..'), '&tracks=DNA,gene_models')) AS ?jbrowse)
+   }
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+--PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+--WITH <$u{EPMC_G_URI}>
+--DELETE { ?loc rdfs:seeAlso ?jbrowse }
+--WHERE {
+--   ?loc rdfs:seeAlso ?jbrowse ;
+--      a faldo:Region
+--} ;
+
+
+--
+-- Update potato RDF graphs
+--
+
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+WITH <$u{ENSEMBL-ST_G_URI}>
+DELETE { ?s rdfs:seeAlso ?o }
+INSERT { ?s rdfs:seeAlso ?fixed }
+WHERE { 
+   ?s rdfs:seeAlso ?o .
+   FILTER regex(?o, 'http://identifiers.org/(go|kegg)') .
+   BIND(uri(replace(str(?o), '%253A', ':')) AS ?fixed)
+} ;
+
+SPARQL
+WITH <$u{ENSEMBL-ST_G_URI}>
+DELETE { ?s <http://semanticscience.org/resource/SIO:000630> ?o }
+INSERT { ?s <http://semanticscience.org/resource/SIO_000630> ?o }
+WHERE { ?s <http://semanticscience.org/resource/SIO:000630> ?o } ;
+
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+WITH <$u{ENSEMBL-ST_G_URI}>
+DELETE { ?s rdfs:seeAlso ?o }
+INSERT { ?s rdfs:seeAlso ?fixed }
+WHERE {
+   ?s rdfs:seeAlso ?o .
+   FILTER regex(?o, 'http://identifiers.org/ensembl') .
+   BIND(uri(replace(str(?o), 'ensembl', 'ensembl.plant')) AS ?fixed)
+} ;
+
+--
+-- Fix SO predicates
+--
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
+WITH <$u{ENSEMBL-ST_G_URI}>
+DELETE { ?s obo:SO_translates_to ?o }
+INSERT { ?s so:translates_to ?o }
+WHERE { ?s obo:SO_translates_to ?o } ;
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
+WITH <$u{ENSEMBL-ST_G_URI}>
+DELETE { ?s obo:SO_has_part ?o }
+INSERT { ?s so:has_part ?o }
+WHERE { ?s obo:SO_has_part ?o } ;
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
+WITH <$u{ENSEMBL-ST_G_URI}>
+DELETE { ?s obo:SO_transcribed_from ?o }
+INSERT { ?s so:transcribed_from  ?o }
+WHERE { ?s obo:SO_transcribed_from ?o } ;
+
+
+--
+-- Add chromosome type to EnsemblPlants RDF graph.
+--
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+INSERT INTO <$u{ENSEMBL-ST_G_URI}> {
+   ?chr2 a obo:SO_0000340
+}  
+WHERE {
+   GRAPH <$u{SGN-ST_G_URI}> {
+      ?chr1 a obo:SO_0000340 .
+      BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/$u{ENSEMBL_RELEASE}/solanum_tuberosum/SolTub_3.0/', replace(str(?chr1), '.+ch0?', ''))) AS ?chr2)
+   }
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX obo: <http://purl.obolibrary.org/obo/>
+--WITH  <$u{ENSEMBL-ST_G_URI}>
+--DELETE WHERE { ?s a obo:SO_0000340 } ;
+
+
+--
+-- Cross-link chromosomes in two RDF graphs.
+--   graph URI: http://solgenomics.net/genome/Solanum_tuberosum
+--     chromosome URI: e.g. http://.../genome/Solanum_tuberosum/chromosome/ST4.03ch01
+--
+--   graph URI: http://plants.ensembl.org/Solanum_tuberosum
+--     chromosome URI: e.g. http://rdf.ebi.ac.uk/resource/ensembl/33/solanum_tuberosum/SolTub_3.0/1
+--
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+INSERT INTO <$u{SGN-ST_G_URI}> {
+   ?chr1 owl:sameAs ?chr2
+}   
+WHERE {
+   GRAPH <$u{SGN-ST_G_URI}> {
+      ?chr1 a obo:SO_0000340 .
+      BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/$u{ENSEMBL_RELEASE}/solanum_tuberosum/SolTub_3.0/', replace(str(?chr1), '.+ch0?', ''))) AS ?chr2)
+   }
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX owl: <http://www.w3.org/2002/07/owl#>
+--WITH  <$u{SGN-ST_G_URI}>
+--DELETE WHERE { ?s owl:sameAs ?o } ;
+
+
+--
+-- Cross-link protein-coding genes in two RDF graphs.
+--   graph URI: http://solgenomics.net/genome/Solanum_tuberosum
+--     gene URI: e.g. http://.../genome/Solanum_tuberosum/gene/PGSC0003DMG400045235
+--
+--   graph URI: http://plants.ensembl.org/Solanum_tuberosum
+--     gene URI: e.g. http://rdf.ebi.ac.uk/resource/ensembl/PGSC0003DMG400045235
+--
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+INSERT INTO <$u{SGN-ST_G_URI}> {
+   ?gene1 owl:sameAs ?gene2
+}
+WHERE {  
+   GRAPH <$u{SGN-ST_G_URI}> {
+      ?gene1 a obo:SO_0001217 .
+      BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl/', replace(str(?gene1), '.+/', ''))) AS ?gene2)
+   }
+   GRAPH <$u{ENSEMBL-ST_G_URI}> {
+      ?gene2 a obo:SO_0001217
+   }
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX owl: <http://www.w3.org/2002/07/owl#>
+--WITH  <$u{SGN-ST_G_URI}>
+--DELETE WHERE { ?gene1 owl:sameAs ?gene2 } ;
+
+
+--
+-- Add primary trascript type to EnsemblPlants RDF graph.
+--
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+INSERT INTO <$u{ENSEMBL-ST_G_URI}> {
+   ?chr2 a obo:SO_0000120
+}  
+WHERE {
+   GRAPH <$u{SGN-ST_G_URI}> {
+      ?chr1 a obo:SO_0000120 .
+      BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl.transcript/', replace(str(?chr1), '.+/', ''))) AS ?chr2)
+   }
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX obo: <http://purl.obolibrary.org/obo/>
+--WITH  <$u{ENSEMBL-ST_G_URI}>
+--DELETE WHERE { ?s a obo:SO_0000120 } ;
+
+
+--
+-- Delete miRNA type for protein-coding primary transcripts.
+--
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+WITH  <$u{ENSEMBL-ST_G_URI}>
+DELETE { ?s a obo:SO_0000276 }
+WHERE { ?s a obo:SO_0000120 } ;
+
+
+--
+-- Cross-link transcripts in two RDF graphs.
+--   graph URI: http://solgenomics.net/genome/Solanum_tuberosum
+--     transcript URI: e.g. http://.../genome/Solanum_tuberosum/prim_transcript/PGSC0003DMT400040463
+--
+--   graph URI: http://plants.ensembl.org/Solanum_tuberosum
+--     transcript URI: e.g. http://rdf.ebi.ac.uk/resource/ensembl.transcript/PGSC0003DMT400040463
+--
+
+SPARQL
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+INSERT INTO <$u{SGN-ST_G_URI}> {
+   ?chr1 owl:sameAs ?chr2
+}   
+WHERE {
+   GRAPH <$u{SGN-ST_G_URI}> {
+      ?chr1 a obo:SO_0000120 .
+      BIND(uri(concat('http://rdf.ebi.ac.uk/resource/ensembl.transcript/', replace(str(?chr1), '.+/', ''))) AS ?chr2)
+   }
+} ;
+
+--
+-- Delete triples
+--
+--SPARQL
+--PREFIX owl: <http://www.w3.org/2002/07/owl#>
+--WITH  <$u{SGN-ST_G_URI}>
+--DELETE WHERE { ?s owl:sameAs ?o } ;
+
+
+--
+-- Pre-compute QTLs' chromosomal locations based on flanking/peak markers' positions.
+-- Note: If there are more than two markers per QTL, take the longest region delineated by the markers.
+--
+
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX owl: <http://www.w3.org/2002/07/owl#>
+PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
+PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+PREFIX sgn-stu: <$u{BASE_URI}/genome/Solanum_tuberosum/>
+INSERT INTO <$u{EPMC_G_URI}> {
+   ?qtl faldo:location ?qtl_loc .
+   ?qtl_loc a faldo:Region ;
+      rdfs:label ?chr_loc ;
+      faldo:begin ?qtl_begin ;
+      faldo:end ?qtl_end
+}
+WHERE {
+   SELECT
+      ?qtl
+      concat(?chr_lb, ':', ?min_begin, '-', ?max_end) AS ?chr_loc
+      uri(concat(?chr, '#', ?min_begin, '-', ?max_end)) AS ?qtl_loc
+      uri(concat(?chr, '#', ?min_begin)) AS ?qtl_begin
+      uri(concat(?chr, '#', ?max_end)) AS ?qtl_end
+   WHERE {
+      SELECT
+         ?qtl
+         ?chr_lb
+         min(?begin_pos) AS ?min_begin
+         max(?end_pos) AS ?max_end
+         uri(concat(sgn-stu:, replace(GROUP_CONCAT(DISTINCT ?chr_lb, ''), '\\s+', '/'))) AS ?chr
+      WHERE {
+         GRAPH <$u{EPMC_G_URI}> {
+            ?dts a dct:Dataset ;
+               so:genome_of obo:NCBITaxon_4113 ;
+               dct:hasPart ?qtl .
+            ?qtl a obo:SO_0000771 ;
+               obo:RO_0002610 ?marker ;
+               dct:identifier ?qtl_id .
+            ?marker a obo:SO_0001645
+         }
+         GRAPH <$u{SGN-ST_G_URI}> {
             ?marker faldo:location ?loc .
             ?loc faldo:begin ?begin ;
                  faldo:end/faldo:position ?end_pos .
@@ -371,26 +769,30 @@ WHERE {
 
 SPARQL
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
 INSERT INTO <$u{EPMC_G_URI}> {
-  ?qtl so:overlaps ?gene
+   ?qtl so:overlaps ?gene
 }
 WHERE {
    GRAPH <$u{EPMC_G_URI}> {
+      ?dts a dct:Dataset ;
+         so:genome_of obo:NCBITaxon_4113 ;
+         dct:hasPart ?qtl .
       ?qtl a obo:SO_0000771 ;
          faldo:location ?loc ;
          obo:RO_0003308 ?trait .
       ?loc faldo:begin ?begin ;
          faldo:end ?end
    }
-   GRAPH <$u{SGN-SL_G_URI}> {
+   GRAPH <$u{SGN-ST_G_URI}> {
       ?begin faldo:position ?begin_pos ;
          faldo:reference ?chr .
       ?end faldo:position ?end_pos .
    }
-   GRAPH <$u{SGN-SL_G_URI}> {
+   GRAPH <$u{SGN-ST_G_URI}> {
       ?loc2 faldo:begin ?begin2 ;
          faldo:end ?end2 ;
          ^faldo:location ?gene .
@@ -401,13 +803,13 @@ WHERE {
    }
    FILTER(?chr = ?chr2)
    FILTER((xsd:integer(?begin_pos) > xsd:integer(?begin_pos2) &&
-           xsd:integer(?begin_pos) < xsd:integer(?end_pos2)) ||
-          (xsd:integer(?end_pos) > xsd:integer(?begin_pos2) &&
-           xsd:integer(?end_pos) < xsd:integer(?end_pos2)) ||
-          (xsd:integer(?begin_pos) < xsd:integer(?begin_pos2) &&
-          xsd:integer(?end_pos) > xsd:integer(?end_pos2)) ||
-          xsd:integer(?begin_pos) > xsd:integer(?begin_pos2) &&
-          xsd:integer(?end_pos) < xsd:integer(?end_pos2))
+      xsd:integer(?begin_pos) < xsd:integer(?end_pos2)) ||
+      (xsd:integer(?end_pos) > xsd:integer(?begin_pos2) &&
+      xsd:integer(?end_pos) < xsd:integer(?end_pos2)) ||
+      (xsd:integer(?begin_pos) < xsd:integer(?begin_pos2) &&
+      xsd:integer(?end_pos) > xsd:integer(?end_pos2)) ||
+      xsd:integer(?begin_pos) > xsd:integer(?begin_pos2) &&
+      xsd:integer(?end_pos) < xsd:integer(?end_pos2))
 } ;
 
 --
@@ -427,15 +829,21 @@ WHERE {
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dct: <http://purl.org/dc/terms/>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
+PREFIX so: <http://purl.obolibrary.org/obo/so#>
 INSERT INTO <$u{EPMC_G_URI}> {
    ?loc rdfs:seeAlso ?jbrowse
 }
 WHERE {
    GRAPH <$u{EPMC_G_URI}> {
+      ?dts a dct:Dataset ;
+         so:genome_of obo:NCBITaxon_4081 ;
+         dct:hasPart ?qtl .
+      ?qtl faldo:location ?loc .
       ?loc a faldo:Region ;
          rdfs:label ?loc_lb .
-      BIND(uri(concat('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/SL2.50&loc=', replace(replace(?loc_lb, '.+\\s+', ''), '-', '..'), '&tracks=DNA,gene_models')) AS ?jbrowse)
+      BIND(uri(concat('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/PGSC_DM_v4.03&loc=', replace(replace(?loc_lb, '.+\\s+', ''), '-', '..'), '&tracks=DNA,gene_models')) AS ?jbrowse)
    }
 } ;
 

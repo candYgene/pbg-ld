@@ -64,4 +64,4 @@ curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPL
 curl --stderr - -L -o uniprot_potato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000011115" \
 	&& echo "http://www.uniprot.org/proteomes/Solanum_tuberosum" > uniprot_potato.rdf.graph
 
-gzip *.rdf
+gzip -f *.rdf
