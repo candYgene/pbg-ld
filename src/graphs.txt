@@ -1,8 +1,11 @@
+http://europepmc.org/articles
 http://solgenomics.net/genome/Solanum_lycopersicum
 http://solgenomics.net/genome/Solanum_pennellii
+http://solgenomics.net/genome/Solanum_tuberosum
 http://plants.ensembl.org/Solanum_lycopersicum
 http://www.uniprot.org/proteomes/Solanum_lycopersicum
-http://europepmc.org/articles
+http://plants.ensembl.org/Solanum_tuberosum
+http://www.uniprot.org/proteomes/Solanum_tuberosum
 http://biohackathon.org/resource/faldo.rdf
 http://purl.obolibrary.org/obo/so.owl
 http://semanticscience.org/ontology/sio.owl
