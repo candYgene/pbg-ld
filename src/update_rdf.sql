@@ -272,7 +272,7 @@ WHERE {
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX sio: <http://semanticscience.org/resource/>
 INSERT INTO <$u{SGN-SL_G_URI}> {
@@ -282,12 +282,12 @@ WHERE {
    GRAPH <$u{SGN-SL_G_URI}> {
       ?marker_sl a obo:SO_0001645 ;
          rdfs:comment ?aliases_sl ;
-         dct:identifier ?marker_sl_id .
+         dcterms:identifier ?marker_sl_id .
    }
    GRAPH <$u{SGN-SP_G_URI}> {
       ?marker_sp a obo:SO_0001645 ;
          rdfs:comment ?aliases_sp ;
-         dct:identifier ?marker_sp_id .
+         dcterms:identifier ?marker_sp_id .
    }
    BIND(bif:strcontains(?aliases_sl, str(?marker_sp_id)) AS ?match)
    FILTER(?match = 1)
@@ -314,7 +314,8 @@ WHERE {
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
@@ -342,12 +343,12 @@ WHERE {
          uri(concat(sgn-sly:, replace(GROUP_CONCAT(DISTINCT ?chr_lb, ''), '\\s+', '/'))) AS ?chr
       WHERE {
          GRAPH <$u{EPMC_G_URI}> {
-            ?dts a dct:Dataset ;
+            ?dts a dcmitype:Dataset ;
                so:genome_of obo:NCBITaxon_4081 ;
-               dct:hasPart ?qtl .
+               dcterms:hasPart ?qtl .
             ?qtl a obo:SO_0000771 ;
                obo:RO_0002610 ?marker ;
-               dct:identifier ?qtl_id .
+               dcterms:identifier ?qtl_id .
             ?marker a obo:SO_0001645
          }
          GRAPH <$u{SGN-SL_G_URI}> {
@@ -382,7 +383,8 @@ WHERE {
 
 SPARQL
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
@@ -391,9 +393,9 @@ INSERT INTO <$u{EPMC_G_URI}> {
 }
 WHERE {
    GRAPH <$u{EPMC_G_URI}> {
-      ?dts a dct:Dataset ;
+      ?dts a dcmitype:Dataset ;
          so:genome_of obo:NCBITaxon_4081 ;
-         dct:hasPart ?qtl .
+         dcterms:hasPart ?qtl .
       ?qtl a obo:SO_0000771 ;
          faldo:location ?loc ;
          obo:RO_0003308 ?trait .
@@ -442,7 +444,8 @@ WHERE {
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 INSERT INTO <$u{EPMC_G_URI}> {
@@ -450,9 +453,9 @@ INSERT INTO <$u{EPMC_G_URI}> {
 }
 WHERE {
    GRAPH <$u{EPMC_G_URI}> {
-      ?dts a dct:Dataset ;
+      ?dts a dcmitype:Dataset ;
          so:genome_of obo:NCBITaxon_4081 ;
-         dct:hasPart ?qtl .
+         dcterms:hasPart ?qtl .
       ?qtl faldo:location ?loc .
       ?loc a faldo:Region ;
          rdfs:label ?loc_lb .
@@ -701,7 +704,8 @@ WHERE {
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX owl: <http://www.w3.org/2002/07/owl#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
@@ -729,12 +733,12 @@ WHERE {
          uri(concat(sgn-stu:, replace(GROUP_CONCAT(DISTINCT ?chr_lb, ''), '\\s+', '/'))) AS ?chr
       WHERE {
          GRAPH <$u{EPMC_G_URI}> {
-            ?dts a dct:Dataset ;
+            ?dts a dcmitype:Dataset ;
                so:genome_of obo:NCBITaxon_4113 ;
-               dct:hasPart ?qtl .
+               dcterms:hasPart ?qtl .
             ?qtl a obo:SO_0000771 ;
                obo:RO_0002610 ?marker ;
-               dct:identifier ?qtl_id .
+               dcterms:identifier ?qtl_id .
             ?marker a obo:SO_0001645
          }
          GRAPH <$u{SGN-ST_G_URI}> {
@@ -769,7 +773,8 @@ WHERE {
 
 SPARQL
 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
@@ -778,9 +783,9 @@ INSERT INTO <$u{EPMC_G_URI}> {
 }
 WHERE {
    GRAPH <$u{EPMC_G_URI}> {
-      ?dts a dct:Dataset ;
+      ?dts a dcmitype:Dataset ;
          so:genome_of obo:NCBITaxon_4113 ;
-         dct:hasPart ?qtl .
+         dcterms:hasPart ?qtl .
       ?qtl a obo:SO_0000771 ;
          faldo:location ?loc ;
          obo:RO_0003308 ?trait .
@@ -829,7 +834,8 @@ WHERE {
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
-PREFIX dct: <http://purl.org/dc/terms/>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 INSERT INTO <$u{EPMC_G_URI}> {
@@ -837,9 +843,9 @@ INSERT INTO <$u{EPMC_G_URI}> {
 }
 WHERE {
    GRAPH <$u{EPMC_G_URI}> {
-      ?dts a dct:Dataset ;
+      ?dts a dcmitype:Dataset ;
          so:genome_of obo:NCBITaxon_4081 ;
-         dct:hasPart ?qtl .
+         dcterms:hasPart ?qtl .
       ?qtl faldo:location ?loc .
       ?loc a faldo:Region ;
          rdfs:label ?loc_lb .
