@@ -448,6 +448,7 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
 INSERT INTO <$u{EPMC_G_URI}> {
    ?loc rdfs:seeAlso ?jbrowse
 }
@@ -838,13 +839,14 @@ PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
+PREFIX obo: <http://purl.obolibrary.org/obo/>
 INSERT INTO <$u{EPMC_G_URI}> {
    ?loc rdfs:seeAlso ?jbrowse
 }
 WHERE {
    GRAPH <$u{EPMC_G_URI}> {
       ?dts a dcmitype:Dataset ;
-         so:genome_of obo:NCBITaxon_4081 ;
+         so:genome_of obo:NCBITaxon_4113 ;
          dcterms:hasPart ?qtl .
       ?qtl faldo:location ?loc .
       ?loc a faldo:Region ;
