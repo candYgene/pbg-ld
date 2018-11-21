@@ -10,7 +10,7 @@ CONTAINER_NAME = virtuoso
 CONTAINER_PORT = 8890
 DATA_DIR = data
 
-all: pull-image start-srv install-pkgs get-rdf import-rdf update-rdf post-install
+all: clean pull-image start-srv install-pkgs get-rdf import-rdf update-rdf post-install
 
 pull-image:
 	docker pull $(DOCKER_IMAGE)
