@@ -616,9 +616,11 @@ WHERE {
          so:genome_of sly: ;
          dcterms:hasPart ?qtl .
       ?qtl faldo:location ?loc .
-      ?loc a faldo:Region ;
-         rdfs:label ?loc_lb .
-      BIND(uri(concat('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/SL2.50&loc=', replace(replace(?loc_lb, '.+\\s+', ''), '-', '..'), '&tracks=DNA,gene_models')) AS ?jbrowse)
+      ?loc a faldo:Region .
+      BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 1)) AS ?chr)
+      BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 2)) AS ?begin)
+      BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 3)) AS ?end)
+      BIND(uri(bif:sprintf('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/SL2.50&loc=SL2.50ch%02d:%d..%d&tracks=DNA,gene_models', ?chr, ?begin, ?end)) AS ?jbrowse)
    }
 } ;
 
@@ -638,9 +640,11 @@ WHERE {
          so:genome_of stu: ;
          dcterms:hasPart ?qtl .
       ?qtl faldo:location ?loc .
-      ?loc a faldo:Region ;
-         rdfs:label ?loc_lb .
-      BIND(uri(concat('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/PGSC_DM_v4.03&loc=', replace(replace(?loc_lb, '.+\\s+', ''), '-', '..'), '&tracks=DNA,gene_models')) AS ?jbrowse)
+      ?loc a faldo:Region .
+      BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 1)) AS ?chr)
+      BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 2)) AS ?begin)
+      BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 3)) AS ?end)
+      BIND(uri(bif:sprintf('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/PGSC_DM_v4.03&loc=ST4.03ch%02d:%d..%d&tracks=DNA,gene_models', ?chr, ?begin, ?end)) AS ?jbrowse)
    }
 } ;
 
