@@ -26,5 +26,3 @@ cp potato_69011SNPs_potato_dm_v4.03.db{,.org}
 sqlite3 PGSC_DM_V403_genes.db "update features set seqid=cast(replace(seqid, 'ST4.03ch', '') as number)"
 sqlite3 PGSC_DM_V403_DArT.db "update features set seqid=cast(replace(seqid, 'ST4.03ch', '') as number)"
 sqlite3 potato_69011SNPs_potato_dm_v4.03.db "update features set seqid=cast(replace(seqid, 'chr', '') as number)"
-
-#xenon scheduler slurm --location localhost:// submit --inherit-env --max-run-time 60 --max-memory 64512 --working-directory . --stderr siga.stderr.txt --stdout siga.stdout.txt bash sleep.sh
