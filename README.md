@@ -28,8 +28,13 @@ RDF graphs:IRIs (_A-Box_)
   * SGN:
     * `http://solgenomics.net/genome/Solanum_lycopersicum`
     * `http://solgenomics.net/genome/Solanum_pennellii`
-  * Ensembl: `http://plants.ensembl.org/Solanum_lycopersicum`
-  * UniProt: `http://www.uniprot.org/proteomes/Solanum_lycopersicum`
+    * `http://solgenomics.net/genome/Solanum_tuberosum`
+  * Ensembl:
+    * `http://plants.ensembl.org/Solanum_lycopersicum`
+    * `http://plants.ensembl.org/Solanum_tuberosum`
+  * UniProt:
+    * `http://www.uniprot.org/proteomes/Solanum_lycopersicum`
+    * `http://www.uniprot.org/proteomes/Solanum_tuberosum`
   * QTLs: `http://europepmc.org/articles`
 
 RDF graphs:IRIs (_T-Box_)
