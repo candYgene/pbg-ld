@@ -380,7 +380,7 @@ PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
-PREFIX sgn-sly: <$u{BASE_URI}/genome/Solanum_lycopersicum/>
+PREFIX sly: <http://purl.obolibrary.org/obo/NCBITaxon_4081>
 INSERT INTO <$u{EPMC_G_URI}> {
    ?qtl faldo:location ?qtl_loc .
    ?qtl_loc a faldo:Region ;
@@ -401,23 +401,23 @@ WHERE {
          ?chr_lb
          min(?begin_pos) AS ?min_begin
          max(?end_pos) AS ?max_end
-         uri(concat(sgn-sly:, replace(GROUP_CONCAT(DISTINCT ?chr_lb, ''), '\\s+', '/'))) AS ?chr
+         uri(replace(GROUP_CONCAT(DISTINCT ?loc, ''), '#.+', '')) AS ?chr
       WHERE {
          GRAPH <$u{EPMC_G_URI}> {
             ?dts a dcmitype:Dataset ;
-               so:genome_of obo:NCBITaxon_4081 ;
+               so:genome_of sly: ;
                dcterms:hasPart ?qtl .
             ?qtl a obo:SO_0000771 ;
                obo:RO_0002610 ?marker ;
                dcterms:identifier ?qtl_id .
-            ?marker a obo:SO_0001645
+            ?marker a obo:SO_0001645 .
          }
          GRAPH <$u{SGN-SL_G_URI}> {
             ?marker faldo:location ?loc .
             ?loc faldo:begin ?begin ;
                faldo:end/faldo:position ?end_pos .
             ?begin faldo:position ?begin_pos ;
-               faldo:reference/rdfs:label ?chr_lb
+               faldo:reference/rdfs:label ?chr_lb .
          }
       }
       GROUP BY ?qtl ?chr_lb
@@ -432,7 +432,7 @@ PREFIX dcmitype: <http://purl.org/dc/dcmitype/>
 PREFIX obo: <http://purl.obolibrary.org/obo/>
 PREFIX so: <http://purl.obolibrary.org/obo/so#>
 PREFIX faldo: <http://biohackathon.org/resource/faldo#>
-PREFIX sgn-stu: <$u{BASE_URI}/genome/Solanum_tuberosum/>
+PREFIX stu: <http://purl.obolibrary.org/obo/NCBITaxon_4113>
 INSERT INTO <$u{EPMC_G_URI}> {
    ?qtl faldo:location ?qtl_loc .
    ?qtl_loc a faldo:Region ;
@@ -453,28 +453,28 @@ WHERE {
          ?chr_lb
          min(?begin_pos) AS ?min_begin
          max(?end_pos) AS ?max_end
-         uri(concat(sgn-stu:, replace(GROUP_CONCAT(DISTINCT ?chr_lb, ''), '\\s+', '/'))) AS ?chr
+         uri(replace(GROUP_CONCAT(DISTINCT ?loc, ''), '#.+', '')) AS ?chr
       WHERE {
          GRAPH <$u{EPMC_G_URI}> {
             ?dts a dcmitype:Dataset ;
-               so:genome_of obo:NCBITaxon_4113 ;
+               so:genome_of stu: ;
                dcterms:hasPart ?qtl .
             ?qtl a obo:SO_0000771 ;
                obo:RO_0002610 ?marker ;
                dcterms:identifier ?qtl_id .
-            ?marker a obo:SO_0001645
+            ?marker a obo:SO_0001645 .
          }
          GRAPH <$u{SGN-ST_G_URI}> {
             ?marker faldo:location ?loc .
             ?loc faldo:begin ?begin ;
                faldo:end/faldo:position ?end_pos .
             ?begin faldo:position ?begin_pos ;
-               faldo:reference/rdfs:label ?chr_lb
+               faldo:reference/rdfs:label ?chr_lb .
          }
       }
       GROUP BY ?qtl ?chr_lb
    }
-};
+} ;
 
 --
 -- Delete triples
