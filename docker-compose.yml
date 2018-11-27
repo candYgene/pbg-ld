@@ -1,27 +1,25 @@
 version: '3'
 services:
 
-  fdp:
-    image: nlesc/odex-fairdatapoint:lofar
-    container_name: fdp
-    ports:
-      - 8080:8080
-      
   virtuoso:
     image: candygene/docker-virtuoso
     container_name: vos
-    links:
-      - fdp
     ports:
       - 8890:8890
       - 1111:1111
     volumes:
       - /home/ubuntu/virtuoso:/tmp/share
-  
+
+  fdp:
+    image: nlesc/odex-fairdatapoint:lofar
+    container_name: fdp
+    depends_on: virtuoso
+    ports:
+      - 8080:8080
+
   grlc:
     image: candygene/grlc
     container_name: grlc
-    links:
-      - virtuoso
+    depends_on: virtuoso
     ports:
       - 8088

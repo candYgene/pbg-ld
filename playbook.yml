@@ -38,24 +38,37 @@
         dest: /usr/bin/docker-compose
         mode: u=rwx,g=xr,o=rx
 
-    
     - name: Add user 'ubuntu' to group 'docker'
       user:
         name: ubuntu
         groups:
           - docker
 
-    # https://docs.ansible.com/ansible/latest/modules/firewalld_module.html
     - name: Configure firewall
       ufw:
         state: enabled
         policy: allow
+
+    - name: Protect against login attacks
+      ufw:
+        rule: limit
+        port: ssh
         proto: tcp
-        port:
-        - 22
-        - 8080
-        - 8088
-        - 8890
+
+    - name: Allow access to port 8080
+      ufw:
+        rule: allow
+        port: 8080
+
+    - name: Allow access to port 8088
+      ufw:
+        rule: allow
+        port: 8088
+
+    - name: Allow access to port 8899
+      ufw:
+        rule: allow
+        port: 8890
 
     - copy:
         src: docker-compose.yml

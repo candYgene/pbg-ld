@@ -620,7 +620,7 @@ WHERE {
       BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 1)) AS ?chr)
       BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 2)) AS ?begin)
       BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 3)) AS ?end)
-      BIND(uri(bif:sprintf('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/SL2.50&loc=SL2.50ch%02d:%d..%d&tracks=DNA,gene_models', ?chr, ?begin, ?end)) AS ?jbrowse)
+      BIND(uri(bif:sprintf('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/SL2.50&loc=SL2.50ch%02d:%d..%d&tracks=DNA,gene_models,SGN_markers,SolCAP_SNPs', ?chr, ?begin, ?end)) AS ?jbrowse)
    }
 } ;
 
@@ -644,7 +644,7 @@ WHERE {
       BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 1)) AS ?chr)
       BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 2)) AS ?begin)
       BIND(bif:atoi(bif:regexp_substr('.+/([0-9]+)#([0-9]+)-([0-9]+)', ?loc, 3)) AS ?end)
-      BIND(uri(bif:sprintf('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/PGSC_DM_v4.03&loc=ST4.03ch%02d:%d..%d&tracks=DNA,gene_models', ?chr, ?begin, ?end)) AS ?jbrowse)
+      BIND(uri(bif:sprintf('https://solgenomics.net/jbrowse_solgenomics/?data=data/json/PGSC_DM_v4.03&loc=ST4.03ch%02d:%d..%d&tracks=DNA,gene_models,DArT_marker,SOLCAP_SNP_marker', ?chr, ?begin, ?end)) AS ?jbrowse)
    }
 } ;
 
