@@ -1,0 +1,123 @@
+---
+- hosts: all
+  tasks:
+    - apt:
+        update_cache: yes
+        name: "{{ item }}"
+      loop:
+        - git
+        - python3-pip
+        - python-pip
+        - make
+        - ntp
+        - apt-transport-https
+        - python-pkg-resources
+        - rsync
+        - python-setuptools
+        - python3-setuptools
+
+    - pip:
+        name: docker-compose
+
+    - name: Docker ppa key
+      apt_key: 
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Docker ppa
+      apt_repository: 
+        repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable'
+
+    - name: Docker
+      apt:
+        name: docker-ce
+
+    - name: docker-compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64
+        dest: /usr/bin/docker-compose
+        mode: u=rwx,g=xr,o=rx
+
+    
+    - name: Add user 'ubuntu' to group 'docker'
+      user:
+        name: ubuntu
+        groups:
+          - docker
+
+    # https://docs.ansible.com/ansible/latest/modules/firewalld_module.html
+    - name: Configure firewall
+      ufw:
+        state: enabled
+        policy: allow
+        proto: tcp
+        port:
+        - 22
+        - 8080
+        - 8088
+        - 8890
+
+    - copy:
+        src: docker-compose.yml
+        dest: /home/ubuntu/docker-compose.yml
+
+    - name: Copy RDF data
+      synchronize:
+        src: data
+        dest: /home/ubuntu/virtuoso
+
+    - name: Copy PL/SQL scripts
+      synchronize:
+        src: src
+        dest: /home/ubuntu/virtuoso
+
+    - docker_service:
+        project_src: /home/ubuntu
+        state: absent
+      
+    - docker_service:
+        project_src: /home/ubuntu
+      register: output
+
+    - debug:
+        var: output
+
+    - name: Wait for Virtuoso ISQL on port 1111
+      wait_for:
+        host: 0.0.0.0
+        port: 1111
+        delay: 10
+        
+    - name: Install Virtuoso (VAD) packages
+      shell: docker exec -w /tmp/share/src vos isql 1111 dba dba errors=stdout install_pkgs.sql
+ 
+    - name: Set data loadpath
+      replace:
+        path: /home/ubuntu/virtuoso/src/import_rdf.sql
+        regexp: '__DATA_DIR__'
+        replace: 'src/data'
+
+    - name: Download RDF data
+      shell: ./get_rdf.sh /home/ubuntu/virtuoso/src/data
+      args:
+        creates: /home/ubuntu/virtuoso/src/data
+        chdir: /home/ubuntu/virtuoso/src
+
+    - name: Extract RDF data from archive
+      unarchive:
+        src: /home/ubuntu/virtuoso/data/pbg-ld.tar.gz
+        dest: /home/ubuntu/virtuoso/data
+        remote_src: yes
+
+    - name: Move RDF data to load dir
+      shell: mv /home/ubuntu/virtuoso/data/rdf/* /home/ubuntu/virtuoso/src/data
+
+    - name: Import RDF data
+      shell: docker exec -w /tmp/share/src vos isql 1111 dba dba errors=stdout import_rdf.sql
+
+    - name: Update RDF data
+      shell: docker exec -w /tmp/share/src vos isql 1111 dba dba errors=stdout update_rdf.sql
+
+    - name: Index RDF data
+      shell: docker exec -w /tmp/share/src/ vos isql 1111 dba dba errors=stdout post_install.sql
+
