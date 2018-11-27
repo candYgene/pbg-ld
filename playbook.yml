@@ -28,17 +28,17 @@
       apt_repository: 
         repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable'
 
-    - name: Docker
+    - name: Install Docker
       apt:
         name: docker-ce
 
-    - name: docker-compose
+    - name: Install Docker Compose
       get_url:
         url: https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64
         dest: /usr/bin/docker-compose
         mode: u=rwx,g=xr,o=rx
 
-    - name: Add user 'ubuntu' to group 'docker'
+    - name: Add user to group
       user:
         name: ubuntu
         groups:

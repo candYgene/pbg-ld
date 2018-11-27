@@ -13,13 +13,16 @@ services:
   fdp:
     image: nlesc/odex-fairdatapoint:lofar
     container_name: fdp
-    depends_on: virtuoso
+    depends_on:
+      - virtuoso
     ports:
       - 8080:8080
 
   grlc:
     image: candygene/grlc
     container_name: grlc
-    depends_on: virtuoso
+    depends_on:
+      - virtuoso
     ports:
       - 8088
+
