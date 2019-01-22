@@ -25,4 +25,6 @@ services:
       - virtuoso
     ports:
       - 8088:8088
+    environment:
+      - GRLC_GITHUB_ACCESS_TOKEN=59a0b81c52dd6e49a9b04043d7ea2305f41f7004
 
