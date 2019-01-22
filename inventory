@@ -1,2 +1,1 @@
-#pbg-ld.semiqprot-emc.surf-hosted.nl ansible_user=ubuntu ansible_become=yes
 pbg-ld.candygene-nlesc.surf-hosted.nl ansible_user=ubuntu ansible_become=yes
