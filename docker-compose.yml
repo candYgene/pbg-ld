@@ -19,12 +19,15 @@ services:
       - 8080:8080
 
   grlc:
-    image: candygene/grlc
+    image: clariah/grlc:dev
     container_name: grlc
     depends_on:
       - virtuoso
     ports:
       - 8088:8088
     environment:
-      - GRLC_GITHUB_ACCESS_TOKEN=59a0b81c52dd6e49a9b04043d7ea2305f41f7004
+      - DEBUG=true
+      - GRLC_GITHUB_ACCESS_TOKEN=xxx
+      - GRLC_SERVER_NAME=pbg-ld.candygene-nlesc.surf-hosted.nl:8088
+      - GRLC_SPARQL_ENDPOINT=http://pbg-ld.candygene-nlesc.surf-hosted.nl:8890/sparql
 
