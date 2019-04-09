@@ -11,7 +11,7 @@ services:
       - /home/ubuntu/virtuoso:/tmp/share
 
   fdp:
-    image: nlesc/odex-fairdatapoint:lofar
+    image: nlesc/odex-fairdatapoint:candygene
     container_name: fdp
     depends_on:
       - virtuoso
