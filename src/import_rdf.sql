@@ -18,10 +18,11 @@ SELECT * FROM DB.DBA.load_list ;
 rdf_loader_run(log_enable=>$u{LOG_LEVEL}) ;
 
 -- count triples per named graph
---SPARQL SELECT
---   ?g COUNT(*) AS ?n
---WHERE {
---   GRAPH ?g { ?s ?p ?o }
---}
---GROUP BY ?g
---ORDER BY DESC(?n) ;
+SPARQL SELECT
+  ?g COUNT(*) AS ?n
+WHERE {
+  GRAPH ?g {
+    ?s ?p ?o
+  }
+}
+GROUP BY ?g ORDER BY DESC(?n) ;
