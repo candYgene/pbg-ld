@@ -2,7 +2,7 @@ version: '3'
 services:
 
   virtuoso:
-    image: candygene/docker-virtuoso
+    image: candygene/pbg-ld:dev
     container_name: vos
     ports:
       - 8890:8890
@@ -19,7 +19,7 @@ services:
       - 8080:8080
 
   grlc:
-    image: clariah/grlc:dev
+    image: clariah/grlc
     container_name: grlc
     depends_on:
       - virtuoso
@@ -28,6 +28,6 @@ services:
     environment:
       - DEBUG=true
       - GRLC_GITHUB_ACCESS_TOKEN=xxx
-      - GRLC_SERVER_NAME=pbg-ld.candygene-nlesc.surf-hosted.nl:8088
-      - GRLC_SPARQL_ENDPOINT=http://pbg-ld.candygene-nlesc.surf-hosted.nl:8890/sparql
+      - GRLC_SERVER_NAME=xxx
+      - GRLC_SPARQL_ENDPOINT=xxx
 
