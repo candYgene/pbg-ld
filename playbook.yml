@@ -74,63 +74,12 @@
         src: docker-compose.yml
         dest: /home/ubuntu/docker-compose.yml
 
-    - name: Copy RDF data
-      synchronize:
-        src: data
-        dest: /home/ubuntu/virtuoso
-
-    - name: Copy PL/SQL scripts
-      synchronize:
-        src: src
-        dest: /home/ubuntu/virtuoso
-
     - docker_service:
         project_src: /home/ubuntu
         state: absent
-      
+        remove_images: all
+
     - docker_service:
         project_src: /home/ubuntu
-      register: output
-
-    - debug:
-        var: output
-
-    - name: Wait for Virtuoso ISQL on port 1111
-      wait_for:
-        host: 0.0.0.0
-        port: 1111
-        delay: 10
-        
-    - name: Install Virtuoso (VAD) packages
-      shell: docker exec -w /tmp/share/src vos isql 1111 dba dba errors=stdout install_pkgs.sql
- 
-    - name: Set data loadpath
-      replace:
-        path: /home/ubuntu/virtuoso/src/import_rdf.sql
-        regexp: '__DATA_DIR__'
-        replace: 'src/data'
-
-    - name: Download RDF data
-      shell: ./get_rdf.sh /home/ubuntu/virtuoso/src/data
-      args:
-        creates: /home/ubuntu/virtuoso/src/data
-        chdir: /home/ubuntu/virtuoso/src
-
-    - name: Extract RDF data from archive
-      unarchive:
-        src: /home/ubuntu/virtuoso/data/pbg-ld.tar.gz
-        dest: /home/ubuntu/virtuoso/data
-        remote_src: yes
-
-    - name: Move RDF data to load dir
-      shell: mv /home/ubuntu/virtuoso/data/rdf/* /home/ubuntu/virtuoso/src/data
-
-    - name: Import RDF data
-      shell: docker exec -w /tmp/share/src vos isql 1111 dba dba errors=stdout import_rdf.sql
-
-    - name: Update RDF data
-      shell: docker exec -w /tmp/share/src vos isql 1111 dba dba errors=stdout update_rdf.sql
-
-    - name: Index RDF data
-      shell: docker exec -w /tmp/share/src/ vos isql 1111 dba dba errors=stdout post_install.sql
-
+        state: present
+    
