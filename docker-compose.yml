@@ -7,8 +7,6 @@ services:
     ports:
       - 8890:8890
       - 1111:1111
-    volumes:
-      - /home/ubuntu/virtuoso:/tmp/share
 
   fdp:
     image: nlesc/odex-fairdatapoint:candygene
