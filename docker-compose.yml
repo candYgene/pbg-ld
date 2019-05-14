@@ -3,7 +3,7 @@ services:
 
   virtuoso:
     image: candygene/pbg-ld:dev
-    container_name: vos
+    container_name: pbg-ld
     ports:
       - 8890:8890
       - 1111:1111
@@ -30,4 +30,3 @@ services:
       - GRLC_GITHUB_ACCESS_TOKEN=xxx
       - GRLC_SERVER_NAME=xxx
       - GRLC_SPARQL_ENDPOINT=xxx
-
