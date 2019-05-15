@@ -3,8 +3,6 @@
 [![Build Status](https://travis-ci.org/candYgene/pbg-ld.svg?branch=dev)](https://travis-ci.org/candYgene/pbg-ld)
 https://hub.docker.com/r/candygene/pbg-ld
 
-[![Docker Automated Build](https://img.shields.io/docker/automated/candygene/pbg-ld.svg?logo=docker)](https://hub.docker.com/r/candygene/pbg-ld)
-
 The _pbg-ld_ software provides access to semantically integrated geno- &
 pheno-typic data on [Solanaceae](http://dbpedia.org/resource/Solanaceae) species
 (such as tomato and potato) and enables ranking of candidate genes associated
