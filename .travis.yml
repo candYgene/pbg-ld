@@ -6,10 +6,8 @@ dist: trusty
 services:
   - docker
 before_install:
-  - sudo apt-get install -y build-essential
-  - pip install SPARQLWrapper
-  - cd src
+  - pip install SPARQLWrapper docker-compose
 install:
-  - travis_wait 60 make all
+  - docker-compose up pbg-ld
 script:
   - python test.py
