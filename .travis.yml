@@ -9,7 +9,7 @@ before_install:
   - pip install SPARQLWrapper docker-compose
 install:
   - docker-compose up -d pbg-ld
+  - sleep 180
   - docker-compose ps
 script:
-  - sleep 10
   - cd src && python test.py graphs.txt http://127.0.0.1:8890/sparql
