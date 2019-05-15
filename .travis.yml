@@ -10,4 +10,5 @@ before_install:
 install:
   - docker-compose up -d pbg-ld
 script:
-  - python test.py
+  - sleep 10
+  - cd src && python test.py
