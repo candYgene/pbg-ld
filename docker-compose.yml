@@ -1,7 +1,7 @@
 version: '3'
 services:
 
-  virtuoso:
+  pbg-ld:
     image: candygene/pbg-ld:dev
     container_name: pbg-ld
     ports:
@@ -12,7 +12,7 @@ services:
     image: nlesc/odex-fairdatapoint:candygene
     container_name: fdp
     depends_on:
-      - virtuoso
+      - pbg-ld
     ports:
       - 8080:8080
 
@@ -20,7 +20,7 @@ services:
     image: clariah/grlc
     container_name: grlc
     depends_on:
-      - virtuoso
+      - pbg-ld
     ports:
       - 8088:8088
     environment:
