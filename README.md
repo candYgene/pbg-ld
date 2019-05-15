@@ -33,7 +33,7 @@ cd pbg-ld
 # list available services
 docker-compose config --services
 # start all services or one-by-one
-docker-compose up # or add [SERVICE]
+docker-compose up -d # or add [SERVICE]
 ```
 
 Note: `grlc` requires (remote) access to a GitHub repo with SPARQL

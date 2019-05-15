@@ -8,6 +8,6 @@ services:
 before_install:
   - pip install SPARQLWrapper docker-compose
 install:
-  - docker-compose up pbg-ld
+  - docker-compose up -d pbg-ld
 script:
   - python test.py
