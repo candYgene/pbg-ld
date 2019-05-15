@@ -1,15 +1,15 @@
 language: python
 python:
-  - "3.4"
+  - "3.6"
 sudo: required
 dist: trusty
 services:
   - docker
 before_install:
-  - pip install SPARQLWrapper docker-compose
+  - pip install docker-compose
 install:
   - docker-compose up -d pbg-ld
   - sleep 180
   - docker-compose ps
 script:
-  - cd src && python test.py graphs.txt http://127.0.0.1:8890/sparql
+  - docker inspect -f '{{json .State.Health.Status}}' pbg-ld | grep healthy || exit 1
