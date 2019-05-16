@@ -2,7 +2,7 @@
 -- Bulk loading RDF graphs into Virtuoso Quad Store.
 --
 
-SET u{DATA_DIR} /tmp/share/__DATA_DIR__ ;
+SET u{DATA_DIR} __DATA_DIR__ ;
 SET u{FILE_NAME} *.gz ;
 SET u{LOG_LEVEL} 2 ;
 
