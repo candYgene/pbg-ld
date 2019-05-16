@@ -4,8 +4,8 @@
 # required for loading RDF into Virtuoso RDF Quad Store.
 
 
-ENSEMBLPLANTS_RELEASE=33
-#UNIPROT_RELEASE=2016_11
+ENSEMBL_RELEASE=33
+#UNIPROT_RELEASE=2019_04
 DATA_DIR=$1
 
 if [ "${DATA_DIR}" != "" ]; then
@@ -44,20 +44,20 @@ curl --stderr - -LH "Accept: application/rdf+xml" -o spto.rdf "http://data.bioon
         && echo "http://purl.bioontology.org/ontology/SPTO" > spto.rdf.graph
 
 # download tomato genome from Ensembl Plants and proteome from UniProt Reference Proteomes
-curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum.ttl.gz" \
+curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBL_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum.ttl.gz" \
 	&& echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum.ttl.graph
 
-curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum_xrefs.ttl.gz" \
+curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBL_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum_xrefs.ttl.gz" \
 	&& echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum_xrefs.ttl.graph
 
 curl --stderr - -L -o uniprot_tomato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000004994" \
 	&& echo "http://www.uniprot.org/proteomes/Solanum_lycopersicum" > uniprot_tomato.rdf.graph
 
 # download potato genome from Ensembl Plants and proteome from UniProt Reference Proteomes
-curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_tuberosum/solanum_tuberosum.ttl.gz" \
+curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBL_RELEASE}/rdf/solanum_tuberosum/solanum_tuberosum.ttl.gz" \
 	&& echo "http://plants.ensembl.org/Solanum_tuberosum" > solanum_tuberosum.ttl.graph
 
-curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBLPLANTS_RELEASE}/rdf/solanum_tuberosum/solanum_tuberosum_xrefs.ttl.gz" \
+curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBL_RELEASE}/rdf/solanum_tuberosum/solanum_tuberosum_xrefs.ttl.gz" \
 	&& echo "http://plants.ensembl.org/Solanum_tuberosum" > solanum_tuberosum_xrefs.ttl.graph
 
 curl --stderr - -L -o uniprot_potato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000011115" \
