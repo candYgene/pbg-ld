@@ -14,22 +14,39 @@ SET u{EPMC_G_URI} http://europepmc.org ;
 
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
 PREFIX chr: <$u{BASE_URI}/genome/Solanum_lycopersicum/chromosome/>
 PREFIX ena: <http://identifiers.org/ena.embl/>
 INSERT INTO <$u{SGN-SL_G_URI}> {
    chr:1 rdfs:seeAlso ena:CM001064.2 .
+   chr:1 dcterms:identifier "ENA:CM001064.2" .
    chr:2 rdfs:seeAlso ena:CM001065.2 .
+   chr:2 dcterms:identifier "ENA:CM001065.2" .
    chr:3 rdfs:seeAlso ena:CM001066.2 .
+   chr:3 dcterms:identifier "ENA:CM001066.2" .
    chr:4 rdfs:seeAlso ena:CM001067.2 .
+   chr:4 dcterms:identifer "ENA:CM001067.2" .
    chr:5 rdfs:seeAlso ena:CM001068.2 .
+   chr:5 dcterms:identifer "ENA:CM001068.2" .
    chr:6 rdfs:seeAlso ena:CM001069.2 .
+   chr:6 dcterms:identifier "ENA:CM001069.2" .
    chr:7 rdfs:seeAlso ena:CM001070.2 .
+   chr:7 dcterms:identifier "ENA:CM001070.2" .
    chr:8 rdfs:seeAlso ena:CM001071.2 .
+   chr:8 dcterms:identifier "ENA:CM001071.2" .
    chr:9 rdfs:seeAlso ena:CM001072.2 .
+   chr:9 dcterms:identifier "ENA:CM001072.2" .
    chr:10 rdfs:seeAlso ena:CM001073.2 .
+   chr:10 dcterms:identifier "ENA:CM001073.2" .
    chr:11 rdfs:seeAlso ena:CM001074.2 .
+   chr:11 dcterms:identifier "ENA:CM001074.2" .
    chr:12 rdfs:seeAlso ena:CM001075.2 .
+   chr:12 dcterms:identifier "ENA:CM001075.2" .
 } ;
+
+--
+-- TODO: Link potato chromosomes to ENA accessions.
+--
 
 --
 -- Delete triples
