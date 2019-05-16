@@ -51,7 +51,7 @@ echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum.ttl
 curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBL_RELEASE}/rdf/solanum_lycopersicum/solanum_lycopersicum_xrefs.ttl.gz"
 echo "http://plants.ensembl.org/Solanum_lycopersicum" > solanum_lycopersicum_xrefs.ttl.graph
 
-curl --stderr - -L -o uniprot_tomato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000004994"
+curl --stderr - -L -o uniprot_tomato.rdf.gz "https://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000004994"
 echo "http://www.uniprot.org/proteomes/Solanum_lycopersicum" > uniprot_tomato.rdf.graph
 
 # download potato genome from Ensembl Plants and proteome from UniProt Reference Proteomes
@@ -61,7 +61,7 @@ echo "http://plants.ensembl.org/Solanum_tuberosum" > solanum_tuberosum.ttl.graph
 curl --stderr - -LO "ftp://ftp.ensemblgenomes.org/pub/plants/release-${ENSEMBL_RELEASE}/rdf/solanum_tuberosum/solanum_tuberosum_xrefs.ttl.gz"
 echo "http://plants.ensembl.org/Solanum_tuberosum" > solanum_tuberosum_xrefs.ttl.graph
 
-curl --stderr - -L -o uniprot_potato.rdf.gz "http://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000011115"
+curl --stderr - -L -o uniprot_potato.rdf.gz "https://www.uniprot.org/uniprot/?format=rdf&compress=yes&query=proteome:UP000011115"
 echo "http://www.uniprot.org/proteomes/Solanum_tuberosum" > uniprot_potato.rdf.graph
 
 ls -lh
