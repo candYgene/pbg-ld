@@ -65,8 +65,8 @@ curl --stderr - -L -o uniprot_potato.rdf.gz "http://www.uniprot.org/uniprot/?for
 	&& echo "http://www.uniprot.org/proteomes/Solanum_tuberosum" > uniprot_potato.rdf.graph
 
 ls -lh
-
 cat *.graph > ${FILE_G_URI}
+cat ${FILE_G_URI}
 
 # exit with non-zero code if one or more files are empty
 [ $(find . -size 0 -print | wc -l) -gt 0 ] && exit 1 || gzip -f *.rdf
