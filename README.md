@@ -71,7 +71,7 @@ RDF graphs:IRIs (_A-Box_)
   * UniProt:
     * `http://www.uniprot.org/proteomes/Solanum_lycopersicum`
     * `http://www.uniprot.org/proteomes/Solanum_tuberosum`
-  * QTLs: `http://europepmc.org/articles`
+  * QTLs: `http://europepmc.org`
 
 RDF graphs:IRIs (_T-Box_)
   * FALDO: `http://biohackathon.org/resource/faldo.rdf`

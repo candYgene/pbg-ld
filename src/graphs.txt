@@ -1,4 +1,4 @@
-http://europepmc.org/articles
+http://europepmc.org
 http://solgenomics.net/genome/Solanum_lycopersicum
 http://solgenomics.net/genome/Solanum_pennellii
 http://solgenomics.net/genome/Solanum_tuberosum

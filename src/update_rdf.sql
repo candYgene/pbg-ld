@@ -6,7 +6,7 @@ SET u{ENSEMBL-ST_G_URI} http://plants.ensembl.org/Solanum_tuberosum ;
 SET u{SGN-SL_G_URI} http://solgenomics.net/genome/Solanum_lycopersicum ;
 SET u{SGN-SP_G_URI} http://solgenomics.net/genome/Solanum_pennellii ;
 SET u{SGN-ST_G_URI} http://solgenomics.net/genome/Solanum_tuberosum ;
-SET u{EPMC_G_URI} http://europepmc.org/articles ;
+SET u{EPMC_G_URI} http://europepmc.org ;
 
 --
 -- Link tomato chromosomes to ENA accessions.
