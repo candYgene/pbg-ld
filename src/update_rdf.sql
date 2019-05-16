@@ -1,11 +1,14 @@
 log_enable(2) ; -- disable transaction logging & enable row-by-row autocommit
 SET u{BASE_URI} http://localhost:8890 ;
 SET u{ENSEMBL_RELEASE} 33 ;
-SET u{ENSEMBL-SL_G_URI} http://plants.ensembl.org/Solanum_lycopersicum ;
-SET u{ENSEMBL-ST_G_URI} http://plants.ensembl.org/Solanum_tuberosum ;
-SET u{SGN-SL_G_URI} http://solgenomics.net/genome/Solanum_lycopersicum ;
-SET u{SGN-SP_G_URI} http://solgenomics.net/genome/Solanum_pennellii ;
-SET u{SGN-ST_G_URI} http://solgenomics.net/genome/Solanum_tuberosum ;
+SET u{SL} Solanum_lycopersicum ;
+SET u{SP} Solanum_pennellii ;
+SET u{ST} Solanum_tuberosum ;
+SET u{ENSEMBL-SL_G_URI} http://plants.ensembl.org/$u{SL} ;
+SET u{ENSEMBL-ST_G_URI} http://plants.ensembl.org/$u{ST} ;
+SET u{SGN-SL_G_URI} http://solgenomics.net/genome/$u{SL} ;
+SET u{SGN-SP_G_URI} http://solgenomics.net/genome/$u{SP} ;
+SET u{SGN-ST_G_URI} http://solgenomics.net/genome/$u{ST} ;
 SET u{EPMC_G_URI} http://europepmc.org ;
 
 --
@@ -15,7 +18,7 @@ SET u{EPMC_G_URI} http://europepmc.org ;
 SPARQL
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 PREFIX dcterms: <http://purl.org/dc/terms/>
-PREFIX chr: <$u{BASE_URI}/genome/Solanum_lycopersicum/chromosome/>
+PREFIX chr: <$u{BASE_URI}/genome/$u{SL}/chromosome/>
 PREFIX ena: <http://identifiers.org/ena.embl/>
 INSERT INTO <$u{SGN-SL_G_URI}> {
    chr:1 rdfs:seeAlso ena:CM001064.2 .
@@ -42,6 +45,42 @@ INSERT INTO <$u{SGN-SL_G_URI}> {
    chr:11 dcterms:identifier "ENA:CM001074.2" .
    chr:12 rdfs:seeAlso ena:CM001075.2 .
    chr:12 dcterms:identifier "ENA:CM001075.2" .
+} ;
+
+--
+-- Link (wild) tomato chromosomes to ENA accessions.
+--
+
+SPARQL
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX dcterms: <http://purl.org/dc/terms/>
+PREFIX chr: <$u{BASE_URI}/genome/$u{SP}/chromosome/>
+PREFIX ena: <http://identifiers.org/ena.embl/>
+INSERT INTO <$u{SGN-SL_G_URI}> {
+   chr:1 rdfs:seeAlso ena:HG975440.1 .
+   chr:1 dcterms:identifier "ENA:HG975440.1" .
+   chr:2 rdfs:seeAlso ena:HG975441.1 .
+   chr:2 dcterms:identifier "ENA:HG975441.1" .
+   chr:3 rdfs:seeAlso ena:HG975442.1 .
+   chr:3 dcterms:identifier "ENA:HG975442.1" .
+   chr:4 rdfs:seeAlso ena:HG975443.1 .
+   chr:4 dcterms:identifer "ENA:HG975443.1" .
+   chr:5 rdfs:seeAlso ena:HG975444.1 .
+   chr:5 dcterms:identifer "ENA:HG975444.1" .
+   chr:6 rdfs:seeAlso ena:HG975445.1 .
+   chr:6 dcterms:identifier "ENA:HG975445.1" .
+   chr:7 rdfs:seeAlso ena:HG975446.1 .
+   chr:7 dcterms:identifier "ENA:HG975446.1" .
+   chr:8 rdfs:seeAlso ena:HG975447.1 .
+   chr:8 dcterms:identifier "ENA:HG975447.1" .
+   chr:9 rdfs:seeAlso ena:HG975448.1 .
+   chr:9 dcterms:identifier "ENA:HG975448.1" .
+   chr:10 rdfs:seeAlso ena:HG975449.1 .
+   chr:10 dcterms:identifier "ENA:HG975449.1" .
+   chr:11 rdfs:seeAlso ena:HG975450.1 .
+   chr:11 dcterms:identifier "ENA:HG975450.1" .
+   chr:12 rdfs:seeAlso ena:HG975451.1 .
+   chr:12 dcterms:identifier "ENA:HG975451.1" .
 } ;
 
 --
