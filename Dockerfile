@@ -16,5 +16,5 @@ COPY data ${VOS_DATA_DIR}
 WORKDIR /tmp/pbg-ld/src
 RUN sed -i.org "s:__DATA_DIR__:${VOS_DATA_DIR}:" import_rdf.sql
 RUN virtuoso-t +wait +configfile ${VOS_CFG_FILE} && \
-    sleep 30 && \
+    sleep 20 && \
     ${VOS} EXEC=SHUTDOWN install_pkgs.sql import_rdf.sql update_rdf.sql post_install.sql
