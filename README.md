@@ -19,7 +19,6 @@ with traits of interest.
 
 ```bash
 git clone https://github.com/candYgene/pbg-ld.git
-cd pbg-ld
 ```
 
 **2. Start Docker service(s).**
@@ -41,7 +40,7 @@ Note: `grlc` requires (remote) access to a GitHub repo with SPARQL
 `docker-compose.yml` file and set the environment variables:
 
 -   `GRLC_GITHUB_ACCESS_TOKEN`
--   `GRLC_SERVER_NAME` (don't include URI scheme `http(s)//:`)
+-   `GRLC_SERVER_NAME` (or _CNAME_, excluding URI scheme `http(s)//:`)
 -   `GRLC_SPARQL_ENDPOINT`
 
 Alternatively, deploy the services on a remote server using Ansible Playbook.
