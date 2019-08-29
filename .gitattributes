@@ -1,4 +1,4 @@
-*.sh linguist-vendored
-*file linguist-vendored
-*.py linguist-vendored
-*.sql linguist-language=SQL
+* linguist-vendored
+*.py linguist-vendored=false
+*.sh linguist-vendored=false
+*.sql linguist-vendored=false
