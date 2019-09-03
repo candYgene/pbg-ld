@@ -1,0 +1,85 @@
+---
+- hosts: all
+  tasks:
+    - apt:
+        update_cache: yes
+        name: "{{ item }}"
+      loop:
+        - git
+        - python3-pip
+        - python-pip
+        - make
+        - ntp
+        - apt-transport-https
+        - python-pkg-resources
+        - rsync
+        - python-setuptools
+        - python3-setuptools
+
+    - pip:
+        name: docker-compose
+
+    - name: Docker ppa key
+      apt_key: 
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Docker ppa
+      apt_repository: 
+        repo: 'deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable'
+
+    - name: Install Docker
+      apt:
+        name: docker-ce
+
+    - name: Install Docker Compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.21.2/docker-compose-Linux-x86_64
+        dest: /usr/bin/docker-compose
+        mode: u=rwx,g=xr,o=rx
+
+    - name: Add user to group
+      user:
+        name: ubuntu
+        groups:
+          - docker
+
+    - name: Configure firewall
+      ufw:
+        state: enabled
+        policy: allow
+
+    - name: Protect against login attacks
+      ufw:
+        rule: limit
+        port: ssh
+        proto: tcp
+
+    - name: Allow access to port 8080
+      ufw:
+        rule: allow
+        port: 8080
+
+    - name: Allow access to port 8088
+      ufw:
+        rule: allow
+        port: 8088
+
+    - name: Allow access to port 8899
+      ufw:
+        rule: allow
+        port: 8890
+
+    - copy:
+        src: docker-compose.yml
+        dest: /home/ubuntu/docker-compose.yml
+
+    - docker_service:
+        project_src: /home/ubuntu
+        state: absent
+        remove_images: all
+
+    - docker_service:
+        project_src: /home/ubuntu
+        state: present
+    

@@ -9,5 +9,5 @@ DB.DBA.VT_INC_INDEX_DB_DBA_RDF_OBJ() ;
 -- periodically populate label lookup tables
 urilbl_ac_init_db() ;
 
--- perioducally re-rank the IRIs
+-- periodically re-rank the IRIs
 s_rank() ;

@@ -1,15 +1,21 @@
 language: python
 python:
-  - "3.4"
+  - "3.6"
 sudo: required
 dist: trusty
 services:
   - docker
 before_install:
-  - sudo apt-get install -y build-essential
-  - pip install SPARQLWrapper
-  - cd src
+  - pip install SPARQLWrapper docker-compose
 install:
-  - travis_wait 60 make all
+  - docker-compose up -d pbg-ld
+  - sleep 180
+  - docker-compose ps -a
+  - cd src
 script:
-  - python test.py
+  - docker inspect -f '{{json .State.Health.Status}}' pbg-ld | grep healthy || exit 1
+  - docker exec -t pbg-ld /bin/bash -c "sort -u ../data/*.graph > /tmp/pbg-ld/src/graphs.txt"
+  - docker cp pbg-ld:/tmp/pbg-ld/src/graphs.txt .
+  - diff -q graphs.txt*
+  - python test.py graphs.txt http://localhost:8890/sparql
+

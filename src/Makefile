@@ -10,12 +10,13 @@ CONTAINER_NAME = virtuoso
 CONTAINER_PORT = 8890
 DATA_DIR = data
 
-all: pull-image start-srv install-pkgs get-rdf import-rdf update-rdf post-install
+all: clean pull-image start-srv install-pkgs get-rdf import-rdf update-rdf post-install
 
 pull-image:
 	docker pull $(DOCKER_IMAGE)
 
 start-srv:
+	docker rm -f $(CONTAINER_NAME) || exit 0
 	docker run --name $(CONTAINER_NAME) -v "$(PWD):$(VOS_SHARE)" -p $(CONTAINER_PORT):8890 -d $(DOCKER_IMAGE)
 	sleep 20
 	docker ps -a

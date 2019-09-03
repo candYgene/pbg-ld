@@ -1,36 +1,90 @@
-# Linked Data Platform for Plant Breeding & Genomics
+# pbg-ld: Linked Data Platform for Plant Breeding & Genomics
 
 [![Build Status](https://travis-ci.org/candYgene/pbg-ld.svg?branch=master)](https://travis-ci.org/candYgene/pbg-ld)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1458168.svg)](https://doi.org/10.5281/zenodo.1458168)
 
-This software provides semantically integrated genotypic/phenotypic data on plants to enable ranking of candidate genes associated with traits of interest (e.g. fruit ripening in tomato).
 
-**1. Clone this git repo.**
+The _pbg-ld_ software provides access to semantically integrated geno- &
+pheno-typic data on [Solanaceae](http://dbpedia.org/resource/Solanaceae) species
+(such as tomato and potato) and enables ranking of candidate genes associated
+with traits of interest.
 
-`git clone https://github.com/candYgene/pbg-ld.git`
+## Prerequisites
 
-**2. Start a [Docker container](https://hub.docker.com/r/candygene/docker-virtuoso/) with [Virtuoso Universal Server](http://virtuoso.openlinksw.com/) & ingest data in [RDF](https://www.w3.org/RDF/).**
+-   [Docker CE](https://docs.docker.com/install/) (e.g., on Ubuntu)
+-   [Docker Compose](https://docs.docker.com/compose/install/)
+-   [Ansible](https://www.ansible.com/)
 
+## Install & deploy
+
+**1. Clone this repository.**
+
+```bash
+git clone https://github.com/candYgene/pbg-ld.git
 ```
-cd pbg-ld/src
-make all # with defaults: CONTAINER_NAME=virtuoso and CONTAINER_PORT=8890 (in development)
-make -e all CONTAINER_NAME=pbg-ld CONTAINER_PORT=80 # override defaults (in production)
+
+**2. Start Docker service(s).**
+
+-   `pbg-ld` - [Virtuoso](http://virtuoso.openlinksw.com/)-based RDF store including data 
+-   `fdp` - [FAIR Data Point](https://www.research-software.nl/software/fairdatapoint) (requires _pbg-ld_)
+-   `grlc` - [grlc WebAPI](https://www.research-software.nl/software/grlc) (requires _pbg-ld_)
+
+```bash
+cd pbg-ld
+# list available services
+docker-compose config --services
+# start all services or one-by-one
+docker-compose up -d # or add [SERVICE]
 ```
 
-Note: other `make` rules: `pull-image`, `build-image`, `start-srv`, `stop-srv`, `restart-srv`, `install-pkgs`, `get-rdf`, `import-rdf`, `update-rdf`, `post-install` and `clean`.
+Alternatively, deploy the services on a remote server using Ansible Playbook.
 
-**3. [Login](http://localhost:8890/conductor) to running Virtuoso instance for admin tasks.**
+```bash
+ansible-playbook -i inventory playbook.yml
+```
 
-Use `dba` for both account name and password.
+Note: `grlc` can deployed with SPARQL [queries](https://github.com/candYgene/queries) stored
 
-**4. Run queries via Virtuoso [SPARQL endpoint](http://localhost:8890/sparql) or browse data via [Faceted Browser](http://localhost:8890/fct/) (no login required).**
+-   locally (in the container)
+
+```bash
+git clone https://github.com/candYgene/queries.git
+docker cp queries grlc:/home/grlc/
+```
+
+-   remotely in a GitHub repo
+
+Set the environment variables in `docker-compose.yml`:
+
+-   `GRLC_GITHUB_ACCESS_TOKEN`
+-   `GRLC_SERVER_NAME` (or _CNAME_, excluding URI scheme `http(s)//:`)
+-   `GRLC_SPARQL_ENDPOINT`
+
+
+**3. Access (meta)data in RDF.**
+
+-   Virtuoso [Faceted Browser](http://localhost:8890/fct/)
+-   Virtuoso [SPARQL endpoint](http://localhost:8890/sparql)
+-   grlc Web API with [local](http://localhost:8088/api/local/local) or [remote](http://localhost:8088/api/candYgene/queries/) queries
+-   FAIR Data Point [API](http://localhost:8080/)
+
+Note: For admin tasks on Virtuoso, [login](http://localhost:8890/conductor) to
+an instance (use `dba` for both account name and password).
+
+## Overview of datasets
 
 RDF graphs:IRIs (_A-Box_)
   * SGN:
     * `http://solgenomics.net/genome/Solanum_lycopersicum`
     * `http://solgenomics.net/genome/Solanum_pennellii`
-  * Ensembl: `http://plants.ensembl.org/Solanum_lycopersicum`
-  * UniProt: `http://www.uniprot.org/proteomes/Solanum_lycopersicum`
-  * QTLs: `http://europepmc.org/articles`
+    * `http://solgenomics.net/genome/Solanum_tuberosum`
+  * Ensembl:
+    * `http://plants.ensembl.org/Solanum_lycopersicum`
+    * `http://plants.ensembl.org/Solanum_tuberosum`
+  * UniProt:
+    * `http://www.uniprot.org/proteomes/Solanum_lycopersicum`
+    * `http://www.uniprot.org/proteomes/Solanum_tuberosum`
+  * QTLs: `http://europepmc.org`
 
 RDF graphs:IRIs (_T-Box_)
   * FALDO: `http://biohackathon.org/resource/faldo.rdf`

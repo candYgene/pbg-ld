@@ -1,6 +1,6 @@
-import sys
+from __future__ import print_function
 from SPARQLWrapper import SPARQLWrapper, JSON
-
+import sys
 
 infile = sys.argv[1] if len(sys.argv) > 1 else "graphs.txt"
 endpoint = sys.argv[2] if len(sys.argv) > 2 else "http://localhost:8890/sparql"
@@ -25,24 +25,26 @@ try:
             GRAPH ?g { ?s ?p ?o }
         }
         GROUP BY ?g
-        ORDER BY DESC(?n)
     """)
     sparql.setReturnFormat(JSON)
     res = sparql.query().convert()
 
     for r in res["results"]["bindings"]:
         g = r['g']['value']
-        n = r['n']['value']
+        n = int(r['n']['value'])
         if g in graphs:
             graphs[g] = n
 except:
-    sys.exit("Couldn't connect to the SPARQL endpoint '{0}'.".format(endpoint))
+    sys.exit("Failed to connect to the SPARQL endpoint '{0}'.".format(endpoint))
 
 exit_code = 0
-std = sys.stdout
-for g,n in graphs.items():
+
+print("# graph_uri\tn_triples")
+for g,n in sorted(graphs.items(), key=lambda x: x[1], reverse=True):
     if n == 0:
         exit_code = 1
-        std = sys.stderr
-    print("{0} triples found in graph '{1}'.".format(n,g), file=std)
+    print("{0}\t{1}".format(g,n), file=sys.stdout)
+
+if exit_code != 0:
+    print("\n*** ERROR: Ingested RDF graph(s) must not be empty. ***", file=sys.stderr)
 sys.exit(exit_code)
