@@ -1,0 +1,41 @@
+{
+    "creators": [
+        {
+            "affiliation": "Netherlands eScience Center",
+            "name": "Kuzniar, Arnold",
+            "orcid": "0000-0003-1711-7961"
+        },
+        {
+            "affiliation": "Netherlands eScience Center",
+            "name": "Martinez-Ortiz, Carlos",
+            "orcid": "0000-0001-5565-7577"
+        },
+        {
+            "affiliation": "Wageningen University and Research",
+            "name": "Singh, Gurnoor",
+            "orcid": "0000-0003-1615-4197"
+        }
+    ],
+    "keywords": [
+        "plant breeding",
+        "Solanaceae",
+        "genomics",
+        "genome annotation",
+        "QTL",
+        "trait",
+        "Sol Genomics Network",
+        "Europe PMC",
+        "UniProt",
+        "Ensembl Plants",
+        "Linked Data",
+        "FAIR Data",
+        "Virtuoso",
+        "RDF",
+        "SPARQL",
+        "Web API"
+    ],
+    "license": {
+        "id": "Apache-2.0"
+    },
+    "title": "pbg-ld"
+}
