@@ -35,23 +35,35 @@ docker-compose config --services
 docker-compose up -d # or add [SERVICE]
 ```
 
-Note: `grlc` requires (remote) access to a GitHub repo with SPARQL
-[queries](https://github.com/candYgene/queries). For this, edit
-`docker-compose.yml` file and set the environment variables:
+Alternatively, deploy the services on a remote server using Ansible Playbook.
+
+```bash
+ansible-playbook -i inventory playbook.yml
+```
+
+Note: `grlc` can deployed with SPARQL [queries](https://github.com/candYgene/queries) stored
+
+-   locally (in the container)
+
+```bash
+git clone https://github.com/candYgene/queries.git
+docker cp queries grlc:/home/grlc/
+```
+
+-   remotely in a GitHub repo
+
+Set the environment variables in `docker-compose.yml`:
 
 -   `GRLC_GITHUB_ACCESS_TOKEN`
 -   `GRLC_SERVER_NAME` (or _CNAME_, excluding URI scheme `http(s)//:`)
 -   `GRLC_SPARQL_ENDPOINT`
 
-Alternatively, deploy the services on a remote server using Ansible Playbook.
-
-`ansible-playbook -i inventory playbook.yml`
 
 **3. Access (meta)data in RDF.**
 
--   Virtuoso [Faceted Browser](http://localhost:8890/fct/) and
-    [SPARQL endpoint](http://localhost:8890/sparql)
--   grlc [Web API](http://localhost:8088/api/candYgene/queries/)
+-   Virtuoso [Faceted Browser](http://localhost:8890/fct/)
+-   Virtuoso [SPARQL endpoint](http://localhost:8890/sparql)
+-   grlc Web API with [local](http://localhost:8088/api/local/local) or [remote](http://localhost:8088/api/candYgene/queries/) queries
 -   FAIR Data Point [API](http://localhost:8080/)
 
 Note: For admin tasks on Virtuoso, [login](http://localhost:8890/conductor) to
