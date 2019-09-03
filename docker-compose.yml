@@ -2,7 +2,7 @@ version: '3'
 services:
 
   pbg-ld:
-    image: candygene/pbg-ld:dev
+    image: candygene/pbg-ld
     container_name: pbg-ld
     ports:
       - 8890:8890
@@ -26,5 +26,5 @@ services:
     environment:
       - DEBUG=true
       - GRLC_GITHUB_ACCESS_TOKEN=xxx
-      - GRLC_SERVER_NAME=xxx
-      - GRLC_SPARQL_ENDPOINT=xxx
+      - GRLC_SERVER_NAME=localhost:8088
+      - GRLC_SPARQL_ENDPOINT=http://pbg-ld:8890/sparql
