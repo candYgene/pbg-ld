@@ -1,8 +1,0 @@
-./potato/PGSC_DM_V403_genes
-./potato/potato_69011SNPs_potato_dm_v4.03
-./potato/PGSC_DM_V403_DArT
-./tomato/ITAG2.4_gene_models
-./tomato/sgnMarkersSpenn
-./tomato/ITAG2.4_sgn_data
-./tomato/ITAG2.4_solCAP
-./tomato/spenn_v2.0_gene_models_annot
