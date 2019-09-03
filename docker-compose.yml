@@ -5,8 +5,8 @@ services:
     image: candygene/pbg-ld
     container_name: pbg-ld
     ports:
-      - 8890:8890
-      - 1111:1111
+      - 8890:8890  # dev
+#      - 80:80  # prod
 
   fdp:
     image: nlesc/odex-fairdatapoint:candygene
@@ -27,4 +27,5 @@ services:
       - DEBUG=true
       - GRLC_GITHUB_ACCESS_TOKEN=xxx
       - GRLC_SERVER_NAME=localhost:8088
-      - GRLC_SPARQL_ENDPOINT=http://pbg-ld:8890/sparql
+      - GRLC_SPARQL_ENDPOINT=http://pbg-ld:8890/sparql  # dev
+#      - GRLC_SPARQL_ENDPOINT=http://pbg-ld/sparql  # prod
