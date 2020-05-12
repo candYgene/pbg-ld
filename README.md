@@ -65,7 +65,7 @@ Set the environment variables in `docker-compose.yml`:
 
 -   Virtuoso [Faceted Browser](http://localhost:8890/fct/)
 -   Virtuoso [SPARQL endpoint](http://localhost:8890/sparql)
--   grlc Web API with [local](http://localhost:8088/api/local/local) or [remote](http://localhost:8088/api/candYgene/queries/) queries
+-   grlc Web API using [local](http://localhost:8088/api-local/) or [remote](http://localhost:8088/api-git/candYgene/queries/) SPARQL queries
 -   FAIR Data Point [API](http://localhost:8080/)
 
 Note: For admin tasks on Virtuoso, [login](http://localhost:8890/conductor) to
