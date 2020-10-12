@@ -1,7 +1,8 @@
 # pbg-ld: Linked Data Platform for Plant Breeding & Genomics
 
-[![Build Status](https://travis-ci.org/candYgene/pbg-ld.svg?branch=master)](https://travis-ci.org/candYgene/pbg-ld)
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1458168.svg)](https://doi.org/10.5281/zenodo.1458168)
+[![Published in PeerJ](https://img.shields.io/badge/published%20in-Appl.Sci.-blue.svg)](https://doi.org/10.3390/app10196813)
+[![Build Status](https://travis-ci.org/candYgene/pbg-ld.svg?branch=master)](https://travis-ci.org/candYgene/pbg-ld)
 
 
 The _pbg-ld_ software provides access to semantically integrated geno- &
