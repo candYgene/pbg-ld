@@ -1,0 +1,13 @@
+http://plants.ensembl.org/arabidopsis_thaliana
+http://plants.ensembl.org/arabidopsis_thaliana
+http://biohackathon.org/resource/faldo.rdf
+http://www.arabidopsis.org
+http://purl.obolibrary.org/obo/go.owl
+https://www.genome.jp/kegg/
+http://plantpan.itps.ncku.edu.tw/
+http://purl.obolibrary.org/obo/mi.owl
+http://purl.obolibrary.org/obo/ro.owl
+http://semanticscience.org/ontology/sio.owl
+http://purl.obolibrary.org/obo/so.owl
+http://string-db.org
+http://plantpan.itps.ncku.edu.tw/
