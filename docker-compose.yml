@@ -1,31 +1,21 @@
 version: '3'
 services:
 
-  pbg-ld:
-    image: candygene/pbg-ld
-    container_name: pbg-ld
+  ara-ld:
+    image: candygene/ara-ld
+    container_name: ara-ld
     ports:
-      - 8890:8890  # dev
-#      - 80:80  # prod
-
-  fdp:
-    image: nlesc/odex-fairdatapoint:candygene
-    container_name: fdp
-    depends_on:
-      - pbg-ld
-    ports:
-      - 8080:8080
+      - 8890:8890
 
   grlc:
     image: clariah/grlc
     container_name: grlc
     depends_on:
-      - pbg-ld
+      - ara-ld
     ports:
       - 8088:8088
     environment:
       - DEBUG=true
-      - GRLC_GITHUB_ACCESS_TOKEN=xxx
+      - GRLC_GITHUB_ACCESS_TOKEN=25ffeec9135467e5bbb81ecda7a95eb2a56826a0
       - GRLC_SERVER_NAME=localhost:8088
-      - GRLC_SPARQL_ENDPOINT=http://pbg-ld:8890/sparql  # dev
-#      - GRLC_SPARQL_ENDPOINT=http://pbg-ld/sparql  # prod
+      - GRLC_SPARQL_ENDPOINT=http://ara-ld:8890/sparql  # dev
