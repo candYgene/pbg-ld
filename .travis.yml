@@ -6,7 +6,7 @@ dist: trusty
 services:
   - docker
 before_install:
-  - pip install SPARQLWrapper docker-compose
+  - pip install setuptools setuptools-rust docker-compose SPARQLWrapper
 install:
   - docker-compose up -d pbg-ld
   - sleep 180
