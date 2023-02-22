@@ -1,4 +1,4 @@
-FROM candygene/virtuoso:latest
+FROM ghcr.io/candygene/virtuoso
 LABEL description="pbg-ld: Linked Data Platform for Plant Breeding & Genomics"
 LABEL maintainer="Arnold Kuzniar"
 LABEL email="a.kuzniar@esciencecenter.nl"
