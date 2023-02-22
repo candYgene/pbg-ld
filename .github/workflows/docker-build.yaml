@@ -1,0 +1,32 @@
+---
+name: Docker image build
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      REGISTRY: ghcr.io
+      IMG_TAG: dev
+    steps:
+      - name: Check out this repo
+        uses: actions/checkout@v2
+      - name: Log into registry
+        uses: docker/login-action@v1
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set docker image name
+        run: |
+          echo "PBG_IMG=${REGISTRY}/${GITHUB_REPOSITORY_OWNER,,}/pbg-ld:${IMG_TAG}" >> ${GITHUB_ENV}
+      - name: Download RDF data from Zenodo
+        runt: |
+          curl -sS -o pbg-ld.zip https://zenodo.org/record/7641017/files/pbg-ld.zip
+          unzip *.zip || true
+      - name: Build docker image
+        run: |
+          docker build -t $PBG_IMG .
+      - name: Publish docker images
+        run: |
+          docker push $PBG_IMG
