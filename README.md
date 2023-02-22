@@ -2,7 +2,7 @@
 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1458168.svg)](https://doi.org/10.5281/zenodo.1458168)
 [![Published in PeerJ](https://img.shields.io/badge/published%20in-Appl.Sci.-blue.svg)](https://doi.org/10.3390/app10196813)
-[![Build Status](https://travis-ci.org/candYgene/pbg-ld.svg?branch=master)](https://travis-ci.org/candYgene/pbg-ld)
+[![CI](https://github.com/candYgene/pbg-ld/actions/workflows/docker-build.yaml/badge.svg?branch=master)](https://github.com/candYgene/pbg-ld/actions/workflows/docker-build.yaml)
 
 
 The _pbg-ld_ software provides access to semantically integrated geno- &
@@ -44,7 +44,7 @@ Alternatively, deploy the services on a remote server using Ansible Playbook.
 ansible-playbook -i inventory playbook.yml
 ```
 
-Note: `grlc` can deployed with SPARQL [queries](https://github.com/candYgene/queries) stored
+Note: `grlc` API can be deployed with SPARQL [queries](https://github.com/candYgene/queries) stored
 
 -   locally (in the container)
 
@@ -53,7 +53,7 @@ git clone https://github.com/candYgene/queries.git
 docker cp queries grlc:/home/grlc/
 ```
 
--   remotely in a GitHub repo
+-   remotely (in a GitHub repo)
 
 Set the environment variables in `docker-compose.yml`:
 
@@ -64,13 +64,11 @@ Set the environment variables in `docker-compose.yml`:
 
 **3. Access (meta)data in RDF.**
 
+-   Virtuoso [Conductor](http://localhost:8890/conductor/) for admin tasks login with default account name/password `dba/dba`
 -   Virtuoso [Faceted Browser](http://localhost:8890/fct/)
--   Virtuoso [SPARQL endpoint](http://localhost:8890/sparql)
+-   Virtuoso [SPARQL endpoint](http://localhost:8890/sparql/)
 -   grlc Web API using [local](http://localhost:8088/api-local/) or [remote](http://localhost:8088/api-git/candYgene/queries/) SPARQL queries
 -   FAIR Data Point [API](http://localhost:8080/)
-
-Note: For admin tasks on Virtuoso, [login](http://localhost:8890/conductor) to
-an instance (use `dba` for both account name and password).
 
 ## Overview of datasets
 
@@ -98,5 +96,3 @@ RDF graphs:IRIs (_T-Box_)
   * TO: `http://purl.obolibrary.org/obo/to.owl`
   * SPTO: `http://purl.bioontology.org/ontology/SPTO`
   * PATO: `http://purl.obolibrary.org/obo/pato.owl`
-
-Further details can be found on the [wiki](../../wiki).
