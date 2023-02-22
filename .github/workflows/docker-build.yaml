@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       REGISTRY: ghcr.io
-      IMG_TAG: dev
+      IMG_TAG: latest
     steps:
       - name: Check out this repo
         uses: actions/checkout@v2
