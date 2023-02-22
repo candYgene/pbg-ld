@@ -21,7 +21,7 @@ jobs:
         run: |
           echo "PBG_IMG=${REGISTRY}/${GITHUB_REPOSITORY_OWNER,,}/pbg-ld:${IMG_TAG}" >> ${GITHUB_ENV}
       - name: Download RDF data from Zenodo
-        runt: |
+        run: |
           curl -sS -o pbg-ld.zip https://zenodo.org/record/7641017/files/pbg-ld.zip
           unzip *.zip || true
       - name: Build docker image
