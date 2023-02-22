@@ -1,5 +1,5 @@
 ---
-name: Docker image build
+name: Docker build
 on: [push]
 
 jobs:
