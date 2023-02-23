@@ -3,7 +3,7 @@ LABEL description="pbg-ld: Linked Data Platform for Plant Breeding & Genomics"
 LABEL maintainer="Arnold Kuzniar"
 LABEL email="a.kuzniar@esciencecenter.nl"
 LABEL orcid="0000-0003-1711-7961"
-LABEL version="1.0.0"
+LABEL version="1.1.0"
 
 ENV VOS_DATA_DIR=/tmp/pbg-ld/data
 ENV VOS_ISQL="isql 1111 dba dba ECHO=ON VERBOSE=ON ERRORS=STDOUT"
