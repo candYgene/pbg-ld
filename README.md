@@ -64,7 +64,7 @@ Set the environment variables in `docker-compose.yml`:
 
 **3. Access (meta)data in RDF.**
 
--   Virtuoso [Conductor](http://localhost:8890/conductor/) for admin tasks login with default account name/password `dba/dba`
+-   Virtuoso [Conductor](http://localhost:8890/conductor/) use for admin tasks (default account name/password: `dba/dba`)
 -   Virtuoso [Faceted Browser](http://localhost:8890/fct/)
 -   Virtuoso [SPARQL endpoint](http://localhost:8890/sparql/)
 -   grlc Web API using [local](http://localhost:8088/api-local/) or [remote](http://localhost:8088/api-git/candYgene/queries/) SPARQL queries
