@@ -2,7 +2,7 @@ version: '3'
 services:
 
   pbg-ld:
-    image: candygene/pbg-ld
+    image: ghcr.io/candygene/pbg-ld
     container_name: pbg-ld
     ports:
       - 8890:8890  # dev
