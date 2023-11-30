@@ -12,7 +12,7 @@ with traits of interest.
 
 ## Prerequisites
 
--   [Docker CE](https://docs.docker.com/install/) (e.g., on Ubuntu)
+-   [Docker CE](https://docs.docker.com/install/)
 -   [Docker Compose](https://docs.docker.com/compose/install/)
 -   [Ansible](https://www.ansible.com/)
 
